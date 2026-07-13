@@ -1,7 +1,7 @@
 import json
 
 data = []
-with open("ai_classification_initial.jsonl", "r", encoding="utf-8") as file:
+with open("ai_classification.jsonl", "r", encoding="utf-8") as file:
     for line in file:
         data.append(json.loads(line))
 
