@@ -1,0 +1,680 @@
+{
+    "AT": {
+        "total_articles": 4505,
+        "languages": {
+            "de": {
+                "count": 4448,
+                "percentage": 98.73
+            },
+            "et": {
+                "count": 3,
+                "percentage": 0.07
+            },
+            "en": {
+                "count": 35,
+                "percentage": 0.78
+            },
+            "tr": {
+                "count": 2,
+                "percentage": 0.04
+            },
+            "sl": {
+                "count": 8,
+                "percentage": 0.18
+            },
+            "da": {
+                "count": 3,
+                "percentage": 0.07
+            },
+            "nl": {
+                "count": 3,
+                "percentage": 0.07
+            },
+            "no": {
+                "count": 1,
+                "percentage": 0.02
+            },
+            "it": {
+                "count": 1,
+                "percentage": 0.02
+            },
+            "af": {
+                "count": 1,
+                "percentage": 0.02
+            }
+        }
+    },
+    "RO": {
+        "total_articles": 23901,
+        "languages": {
+            "ro": {
+                "count": 23481,
+                "percentage": 98.24
+            },
+            "hu": {
+                "count": 177,
+                "percentage": 0.74
+            },
+            "en": {
+                "count": 195,
+                "percentage": 0.82
+            },
+            "it": {
+                "count": 23,
+                "percentage": 0.1
+            },
+            "ca": {
+                "count": 15,
+                "percentage": 0.06
+            },
+            "fr": {
+                "count": 4,
+                "percentage": 0.02
+            },
+            "nl": {
+                "count": 2,
+                "percentage": 0.01
+            },
+            "lt": {
+                "count": 1,
+                "percentage": 0.0
+            },
+            "ar": {
+                "count": 1,
+                "percentage": 0.0
+            },
+            "es": {
+                "count": 1,
+                "percentage": 0.0
+            },
+            "pt": {
+                "count": 1,
+                "percentage": 0.0
+            }
+        }
+    },
+    "FR": {
+        "total_articles": 11726,
+        "languages": {
+            "fr": {
+                "count": 11231,
+                "percentage": 95.78
+            },
+            "en": {
+                "count": 120,
+                "percentage": 1.02
+            },
+            "de": {
+                "count": 371,
+                "percentage": 3.16
+            },
+            "nl": {
+                "count": 2,
+                "percentage": 0.02
+            },
+            "it": {
+                "count": 1,
+                "percentage": 0.01
+            },
+            "sl": {
+                "count": 1,
+                "percentage": 0.01
+            }
+        }
+    },
+    "IT": {
+        "total_articles": 18555,
+        "languages": {
+            "it": {
+                "count": 18379,
+                "percentage": 99.05
+            },
+            "en": {
+                "count": 175,
+                "percentage": 0.94
+            },
+            "ca": {
+                "count": 1,
+                "percentage": 0.01
+            }
+        }
+    },
+    "RS": {
+        "total_articles": 7616,
+        "languages": {
+            "hr": {
+                "count": 6982,
+                "percentage": 91.68
+            },
+            "mk": {
+                "count": 529,
+                "percentage": 6.95
+            },
+            "sk": {
+                "count": 24,
+                "percentage": 0.32
+            },
+            "ru": {
+                "count": 16,
+                "percentage": 0.21
+            },
+            "uk": {
+                "count": 1,
+                "percentage": 0.01
+            },
+            "en": {
+                "count": 23,
+                "percentage": 0.3
+            },
+            "sq": {
+                "count": 31,
+                "percentage": 0.41
+            },
+            "lt": {
+                "count": 2,
+                "percentage": 0.03
+            },
+            "sl": {
+                "count": 6,
+                "percentage": 0.08
+            },
+            "bg": {
+                "count": 1,
+                "percentage": 0.01
+            },
+            "de": {
+                "count": 1,
+                "percentage": 0.01
+            }
+        }
+    },
+    "RU": {
+        "total_articles": 16677,
+        "languages": {
+            "ru": {
+                "count": 16663,
+                "percentage": 99.92
+            },
+            "bg": {
+                "count": 10,
+                "percentage": 0.06
+            },
+            "et": {
+                "count": 4,
+                "percentage": 0.02
+            }
+        }
+    },
+    "BR": {
+        "total_articles": 10854,
+        "languages": {
+            "pt": {
+                "count": 10801,
+                "percentage": 99.51
+            },
+            "en": {
+                "count": 26,
+                "percentage": 0.24
+            },
+            "es": {
+                "count": 7,
+                "percentage": 0.06
+            },
+            "ca": {
+                "count": 7,
+                "percentage": 0.06
+            },
+            "it": {
+                "count": 5,
+                "percentage": 0.05
+            },
+            "de": {
+                "count": 7,
+                "percentage": 0.06
+            },
+            "sk": {
+                "count": 1,
+                "percentage": 0.01
+            }
+        }
+    },
+    "PL": {
+        "total_articles": 2931,
+        "languages": {
+            "pl": {
+                "count": 2919,
+                "percentage": 99.59
+            },
+            "de": {
+                "count": 10,
+                "percentage": 0.34
+            },
+            "sl": {
+                "count": 1,
+                "percentage": 0.03
+            },
+            "en": {
+                "count": 1,
+                "percentage": 0.03
+            }
+        }
+    },
+    "BE": {
+        "total_articles": 2048,
+        "languages": {
+            "fr": {
+                "count": 1227,
+                "percentage": 59.91
+            },
+            "nl": {
+                "count": 797,
+                "percentage": 38.92
+            },
+            "en": {
+                "count": 24,
+                "percentage": 1.17
+            }
+        }
+    },
+    "ES": {
+        "total_articles": 8766,
+        "languages": {
+            "es": {
+                "count": 8652,
+                "percentage": 98.7
+            },
+            "ca": {
+                "count": 113,
+                "percentage": 1.29
+            },
+            "pt": {
+                "count": 1,
+                "percentage": 0.01
+            }
+        }
+    },
+    "DE": {
+        "total_articles": 5738,
+        "languages": {
+            "de": {
+                "count": 5734,
+                "percentage": 99.93
+            },
+            "en": {
+                "count": 3,
+                "percentage": 0.05
+            },
+            "ca": {
+                "count": 1,
+                "percentage": 0.02
+            }
+        }
+    },
+    "US": {
+        "total_articles": 11234,
+        "languages": {
+            "en": {
+                "count": 10798,
+                "percentage": 96.12
+            },
+            "es": {
+                "count": 435,
+                "percentage": 3.87
+            },
+            "ar": {
+                "count": 1,
+                "percentage": 0.01
+            }
+        }
+    },
+    "GB": {
+        "total_articles": 6755,
+        "languages": {
+            "en": {
+                "count": 6753,
+                "percentage": 99.97
+            },
+            "de": {
+                "count": 1,
+                "percentage": 0.01
+            },
+            "nl": {
+                "count": 1,
+                "percentage": 0.01
+            }
+        }
+    },
+    "CZ": {
+        "total_articles": 2954,
+        "languages": {
+            "cs": {
+                "count": 2916,
+                "percentage": 98.71
+            },
+            "sk": {
+                "count": 1,
+                "percentage": 0.03
+            },
+            "de": {
+                "count": 1,
+                "percentage": 0.03
+            },
+            "en": {
+                "count": 31,
+                "percentage": 1.05
+            },
+            "pl": {
+                "count": 4,
+                "percentage": 0.14
+            },
+            "sl": {
+                "count": 1,
+                "percentage": 0.03
+            }
+        }
+    },
+    "HR": {
+        "total_articles": 5823,
+        "languages": {
+            "hr": {
+                "count": 5750,
+                "percentage": 98.75
+            },
+            "it": {
+                "count": 67,
+                "percentage": 1.15
+            },
+            "en": {
+                "count": 3,
+                "percentage": 0.05
+            },
+            "sl": {
+                "count": 2,
+                "percentage": 0.03
+            },
+            "de": {
+                "count": 1,
+                "percentage": 0.02
+            }
+        }
+    },
+    "BG": {
+        "total_articles": 5777,
+        "languages": {
+            "bg": {
+                "count": 5767,
+                "percentage": 99.83
+            },
+            "en": {
+                "count": 9,
+                "percentage": 0.16
+            },
+            "ru": {
+                "count": 1,
+                "percentage": 0.02
+            }
+        }
+    },
+    "GR": {
+        "total_articles": 11317,
+        "languages": {
+            "el": {
+                "count": 11288,
+                "percentage": 99.74
+            },
+            "en": {
+                "count": 29,
+                "percentage": 0.26
+            }
+        }
+    },
+    "MD": {
+        "total_articles": 3030,
+        "languages": {
+            "ro": {
+                "count": 2932,
+                "percentage": 96.77
+            },
+            "ru": {
+                "count": 92,
+                "percentage": 3.04
+            },
+            "sl": {
+                "count": 3,
+                "percentage": 0.1
+            },
+            "en": {
+                "count": 2,
+                "percentage": 0.07
+            },
+            "de": {
+                "count": 1,
+                "percentage": 0.03
+            }
+        }
+    },
+    "HU": {
+        "total_articles": 4650,
+        "languages": {
+            "hu": {
+                "count": 4556,
+                "percentage": 97.98
+            },
+            "de": {
+                "count": 30,
+                "percentage": 0.65
+            },
+            "en": {
+                "count": 64,
+                "percentage": 1.38
+            }
+        }
+    },
+    "SK": {
+        "total_articles": 3489,
+        "languages": {
+            "sk": {
+                "count": 3276,
+                "percentage": 93.9
+            },
+            "en": {
+                "count": 12,
+                "percentage": 0.34
+            },
+            "hu": {
+                "count": 193,
+                "percentage": 5.53
+            },
+            "cs": {
+                "count": 4,
+                "percentage": 0.11
+            },
+            "sl": {
+                "count": 4,
+                "percentage": 0.11
+            }
+        }
+    },
+    "IE": {
+        "total_articles": 1200,
+        "languages": {
+            "en": {
+                "count": 1199,
+                "percentage": 99.92
+            },
+            "ca": {
+                "count": 1,
+                "percentage": 0.08
+            }
+        }
+    },
+    "PT": {
+        "total_articles": 4092,
+        "languages": {
+            "pt": {
+                "count": 4072,
+                "percentage": 99.51
+            },
+            "en": {
+                "count": 20,
+                "percentage": 0.49
+            }
+        }
+    },
+    "NL": {
+        "total_articles": 4125,
+        "languages": {
+            "nl": {
+                "count": 4068,
+                "percentage": 98.62
+            },
+            "en": {
+                "count": 44,
+                "percentage": 1.07
+            },
+            "tr": {
+                "count": 9,
+                "percentage": 0.22
+            },
+            "af": {
+                "count": 3,
+                "percentage": 0.07
+            },
+            "cy": {
+                "count": 1,
+                "percentage": 0.02
+            }
+        }
+    },
+    "DK": {
+        "total_articles": 892,
+        "languages": {
+            "da": {
+                "count": 854,
+                "percentage": 95.74
+            },
+            "no": {
+                "count": 10,
+                "percentage": 1.12
+            },
+            "de": {
+                "count": 23,
+                "percentage": 2.58
+            },
+            "en": {
+                "count": 4,
+                "percentage": 0.45
+            },
+            "sv": {
+                "count": 1,
+                "percentage": 0.11
+            }
+        }
+    },
+    "EE": {
+        "total_articles": 470,
+        "languages": {
+            "et": {
+                "count": 375,
+                "percentage": 79.79
+            },
+            "ru": {
+                "count": 95,
+                "percentage": 20.21
+            }
+        }
+    },
+    "EU": {
+        "total_articles": 147,
+        "languages": {
+            "en": {
+                "count": 134,
+                "percentage": 91.16
+            },
+            "de": {
+                "count": 8,
+                "percentage": 5.44
+            },
+            "fr": {
+                "count": 5,
+                "percentage": 3.4
+            }
+        }
+    },
+    "EG": {
+        "total_articles": 44,
+        "languages": {
+            "ar": {
+                "count": 43,
+                "percentage": 97.73
+            },
+            "en": {
+                "count": 1,
+                "percentage": 2.27
+            }
+        }
+    },
+    "SA": {
+        "total_articles": 7,
+        "languages": {
+            "ar": {
+                "count": 7,
+                "percentage": 100.0
+            }
+        }
+    },
+    "AE": {
+        "total_articles": 1,
+        "languages": {
+            "en": {
+                "count": 1,
+                "percentage": 100.0
+            }
+        }
+    },
+    "IR": {
+        "total_articles": 2,
+        "languages": {
+            "en": {
+                "count": 2,
+                "percentage": 100.0
+            }
+        }
+    },
+    "AM": {
+        "total_articles": 6,
+        "languages": {
+            "en": {
+                "count": 6,
+                "percentage": 100.0
+            }
+        }
+    },
+    "QA": {
+        "total_articles": 3,
+        "languages": {
+            "ar": {
+                "count": 3,
+                "percentage": 100.0
+            }
+        }
+    },
+    "PS": {
+        "total_articles": 5,
+        "languages": {
+            "ar": {
+                "count": 5,
+                "percentage": 100.0
+            }
+        }
+    },
+    "AZ": {
+        "total_articles": 1,
+        "languages": {
+            "en": {
+                "count": 1,
+                "percentage": 100.0
+            }
+        }
+    }
+}

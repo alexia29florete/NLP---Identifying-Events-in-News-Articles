@@ -1,0 +1,6 @@
+networkx
+matplotlib
+scipy
+rapidfuzz
+langdetect
+sentence-transformers
