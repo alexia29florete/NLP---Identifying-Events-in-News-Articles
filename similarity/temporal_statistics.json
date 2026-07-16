@@ -1,0 +1,27 @@
+{
+    "number_of_pairs": 35102,
+    "average_distance_days": 22.14,
+    "median_distance_days": 0.81,
+    "minimum_distance_days": 0.0,
+    "maximum_distance_days": 3998.76,
+    "same_day": {
+        "count": 18727,
+        "percentage": 53.35
+    },
+    "one_to_seven_days": {
+        "count": 6097,
+        "percentage": 17.37
+    },
+    "eight_to_thirty_days": {
+        "count": 4217,
+        "percentage": 12.01
+    },
+    "thirty_one_to_ninety_days": {
+        "count": 3762,
+        "percentage": 10.72
+    },
+    "more_than_ninety_days": {
+        "count": 2299,
+        "percentage": 6.55
+    }
+}
