@@ -1,4 +1,5 @@
 import json
+import os
 from langdetect import detect, DetectorFactory
 
 DetectorFactory.seed = 0
@@ -37,7 +38,7 @@ def corrupted_text(text):
 
     replacement_percentage = replacement_characters / len(text)
 
-    if replacement_percentage >= 0.30:
+    if replacement_percentage > 0.10:
         return True
 
     return False
@@ -151,6 +152,9 @@ def normalize_text(text):
 
     return text
 
+os.makedirs("cleaning_results", exist_ok=True)
+os.makedirs("cleaning_results/json", exist_ok=True)
+os.makedirs("cleaning_results/reports", exist_ok=True)
 
 data = []
 
@@ -243,13 +247,9 @@ for article_id in articles:
         })
 
 
-with open("suspicious_language_articles.jsonl", "w", encoding="utf-8") as file:
+with open("cleaning_results/json/suspicious_language_articles.jsonl", "w", encoding="utf-8") as file:
     for article in suspicious_articles:
         file.write(json.dumps(article, ensure_ascii=False) + "\n")
-
-
-print("Invalid articles:", len(invalid_article_ids))
-
 
 # ------elimin perechile care contin articole invalide---------------
 
@@ -266,7 +266,7 @@ for elem in data:
         cleaned_data.append(elem)
 
 
-with open("removed_invalid_pairs.jsonl", "w", encoding="utf-8") as file:
+with open("cleaning_results/json/removed_invalid_pairs.jsonl", "w", encoding="utf-8") as file:
     for elem in removed_pairs:
         file.write(json.dumps(elem, ensure_ascii=False) + "\n")
 
@@ -276,9 +276,12 @@ with open("ai_classification_cleaned.jsonl", "w", encoding="utf-8") as file:
         file.write(json.dumps(elem, ensure_ascii=False) + "\n")
 
 
-print("Initial pairs:", len(data))
-print("Removed pairs:", len(removed_pairs))
-print("Remaining pairs:", len(cleaned_data))
+with open("cleaning_results/reports/cleaning_summary.txt", "w", encoding="utf-8") as file:
+    file.write("Treshold: 10%\n")
+    file.write("Invalid articles: " + str(len(invalid_article_ids)) + "\n")
+    file.write("Initial pairs: " + str(len(data)) + "\n")
+    file.write("Removed pairs: " + str(len(removed_pairs)) + "\n")
+    file.write("Remaining pairs: " + str(len(cleaned_data)) + "\n")
 
 
 # ------articolele unice dupa curatare-------------------------------
@@ -360,5 +363,5 @@ for region in languages_by_region:
         region_language_percentages[region]["languages"][language] = {"count": count, "percentage": round(percentage, 2)}
 
 
-with open("languages_by_region.json", "w", encoding="utf-8") as file:
+with open("cleaning_results/json/languages_by_region.json", "w", encoding="utf-8") as file:
     json.dump(region_language_percentages, file, indent=4, ensure_ascii=False)

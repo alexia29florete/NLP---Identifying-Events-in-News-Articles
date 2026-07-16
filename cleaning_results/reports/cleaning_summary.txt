@@ -1,0 +1,5 @@
+Treshold: 10%
+Invalid articles: 813
+Initial pairs: 100000
+Removed pairs: 449
+Remaining pairs: 99551

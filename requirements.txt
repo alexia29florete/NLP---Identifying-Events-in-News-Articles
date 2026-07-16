@@ -4,3 +4,4 @@ scipy
 rapidfuzz
 langdetect
 sentence-transformers
+nltk

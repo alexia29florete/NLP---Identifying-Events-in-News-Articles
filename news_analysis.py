@@ -150,46 +150,50 @@ for index, elem in enumerate(similar_news, start = 1):
 
     analyzed_data.append(elem)
 
-print("trivial_duplicate:", trivial_dup, "pairs", round(trivial_dup / len(similar_news) * 100, 2), "%")
-print("near_duplicate:", near_dup, "pairs", round(near_dup / len(similar_news) * 100, 2), "%")
-print("different_news_same_event:", diff, "pairs", round(diff / len(similar_news) * 100, 2), "%")
-print("possible_literal_translation:", possible_literal_translation, "pairs", round(possible_literal_translation / len(similar_news) * 100, 2), "%")
-print("similar_cross_language_news:", similar_cross_language_news, "pairs", round(similar_cross_language_news / len(similar_news) * 100, 2), "%")
-print("different_cross_language_news:", different_cross_language_news, "pairs", round(different_cross_language_news / len(similar_news) * 100, 2), "%")
+# creez folderul similarity daca nu exista
+os.makedirs("similarity", exist_ok=True)
+os.makedirs("similarity/graphical_representation", exist_ok=True)
+os.makedirs("similarity/json", exist_ok=True)
+os.makedirs("similarity/json/same_language", exist_ok=True)
+os.makedirs("similarity/json/different_language", exist_ok=True)
+os.makedirs("similarity/json/temporal_distribution", exist_ok=True)
+os.makedirs("similarity/reports", exist_ok=True)
+
+with open("similarity/reports/similarity_summary.txt", "w", encoding="utf-8") as file:
+    file.write("Pairs classified as Yes: " + str(len(similar_news)) + "\n")
+    file.write("trivial_duplicate: " + str(trivial_dup) + " pairs, " + str(round(trivial_dup / len(similar_news) * 100, 2)) + "%\n")
+    file.write("near_duplicate: " + str(near_dup) + " pairs, " + str(round(near_dup / len(similar_news) * 100, 2)) + "%\n")
+    file.write("different_news_same_event: " + str(diff) + " pairs, " + str(round(diff / len(similar_news) * 100, 2)) + "%\n")
+    file.write("possible_literal_translation: " + str(possible_literal_translation) + " pairs, " + str(round(possible_literal_translation / len(similar_news) * 100, 2)) + "%\n")
+    file.write("similar_cross_language_news: " + str(similar_cross_language_news) + " pairs, " + str(round(similar_cross_language_news / len(similar_news) * 100, 2)) + "%\n")
+    file.write("different_cross_language_news: " + str(different_cross_language_news) + " pairs, " + str(round(different_cross_language_news / len(similar_news) * 100, 2)) + "%\n")
     
-with open("similar_news_analysis.jsonl", "w", encoding="utf-8") as file:
+with open("similarity/json/similar_news_analysis.jsonl", "w", encoding="utf-8") as file:
     for elem in analyzed_data:
         file.write(json.dumps(elem, ensure_ascii=False) + "\n")
 
-# creez folderul similarity daca nu exista
-os.makedirs("similarity", exist_ok=True)
-
-with open("similarity/trivial_duplicate.jsonl", "w", encoding="utf-8") as file:
+with open("similarity/json/same_language/trivial_duplicate.jsonl", "w", encoding="utf-8") as file:
     for elem in trivial_duplicate_pairs:
         file.write(json.dumps(elem, ensure_ascii=False) + "\n")
 
-with open("similarity/near_duplicate.jsonl", "w", encoding="utf-8") as file:
+with open("similarity/json/same_language/near_duplicate.jsonl", "w", encoding="utf-8") as file:
     for elem in near_duplicate_pairs:
         file.write(json.dumps(elem, ensure_ascii=False) + "\n")
 
-with open("similarity/different_news_same_event.jsonl", "w", encoding="utf-8") as file:
+with open("similarity/json/same_language/different_news_same_event.jsonl", "w", encoding="utf-8") as file:
     for elem in different_news_same_event_pairs:
         file.write(json.dumps(elem, ensure_ascii=False) + "\n")
 
-with open("similarity/possible_literal_translation.jsonl", "w", encoding="utf-8") as file:
+with open("similarity/json/different_language/possible_literal_translation.jsonl", "w", encoding="utf-8") as file:
     for elem in possible_literal_translation_pairs:
         file.write(json.dumps(elem, ensure_ascii=False) + "\n")
 
-with open("similarity/similar_cross_language_news.jsonl", "w", encoding="utf-8") as file:
+with open("similarity/json/different_language/similar_cross_language_news.jsonl", "w", encoding="utf-8") as file:
     for elem in similar_cross_language_news_pairs:
         file.write(json.dumps(elem, ensure_ascii=False) + "\n")
 
-with open("similarity/different_cross_language_news.jsonl", "w", encoding="utf-8") as file:
+with open("similarity/json/different_language/different_cross_language_news.jsonl", "w", encoding="utf-8") as file:
     for elem in different_cross_language_news_pairs:
-        file.write(json.dumps(elem, ensure_ascii=False) + "\n")
-
-with open("similarity/similar_news_analysis.jsonl", "w", encoding="utf-8") as file:
-    for elem in analyzed_data:
         file.write(json.dumps(elem, ensure_ascii=False) + "\n")
 
 # reprezentare grafica
@@ -222,7 +226,7 @@ for index in range(len(category_percentages)):
     )
 
 plt.tight_layout()
-plt.savefig("similarity/similarity_percentages.png")
+plt.savefig("similarity/graphical_representation/similarity_percentages.png")
 plt.close()
 
 # grafic pentru distanta temporala
@@ -235,7 +239,7 @@ plt.xlabel("Distanta temporala in zile")
 plt.ylabel("Numar de perechi")
 
 plt.tight_layout()
-plt.savefig("similarity/temporal_distance_distribution.png")
+plt.savefig("similarity/graphical_representation/temporal_distance_distribution.png")
 plt.close()
 
 # grafic pentru distante de maximum 30 de zile
@@ -253,7 +257,7 @@ plt.title("Distributia distantelor temporale de maximum 30 de zile")
 plt.xlabel("Distanta temporala in zile")
 plt.ylabel("Numar de perechi")
 plt.tight_layout()
-plt.savefig("similarity/temporal_distance_distribution_30_days.png")
+plt.savefig("similarity/graphical_representation/temporal_distance_distribution_30_days.png")
 plt.close()
 
 # impart distantele temporale pe intervale
@@ -315,7 +319,7 @@ for index in range(len(temporal_percentages)):
     )
 
 plt.tight_layout()
-plt.savefig("similarity/temporal_distance_intervals.png")
+plt.savefig("similarity/graphical_representation/temporal_distance_intervals.png")
 plt.close()
 
 # calculez statisticile pentru distantele temporale
@@ -367,5 +371,5 @@ temporal_statistics = {
     }
 }
 
-with open("similarity/temporal_statistics.json", "w", encoding="utf-8") as file:
+with open("similarity/json/temporal_distribution/temporal_statistics.json", "w", encoding="utf-8") as file:
     json.dump(temporal_statistics, file, indent=4, ensure_ascii=False)
