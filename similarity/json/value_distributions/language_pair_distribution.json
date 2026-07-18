@@ -1,0 +1,746 @@
+[
+    {
+        "language_pair": "en-ro",
+        "count": 519
+    },
+    {
+        "language_pair": "hr-ro",
+        "count": 319
+    },
+    {
+        "language_pair": "de-en",
+        "count": 274
+    },
+    {
+        "language_pair": "fr-ro",
+        "count": 273
+    },
+    {
+        "language_pair": "en-hr",
+        "count": 272
+    },
+    {
+        "language_pair": "ro-ru",
+        "count": 245
+    },
+    {
+        "language_pair": "en-es",
+        "count": 245
+    },
+    {
+        "language_pair": "en-pt",
+        "count": 241
+    },
+    {
+        "language_pair": "en-fr",
+        "count": 228
+    },
+    {
+        "language_pair": "el-ro",
+        "count": 226
+    },
+    {
+        "language_pair": "hr-ru",
+        "count": 212
+    },
+    {
+        "language_pair": "hu-ro",
+        "count": 190
+    },
+    {
+        "language_pair": "fr-pt",
+        "count": 179
+    },
+    {
+        "language_pair": "de-ro",
+        "count": 176
+    },
+    {
+        "language_pair": "bg-ro",
+        "count": 176
+    },
+    {
+        "language_pair": "fr-it",
+        "count": 173
+    },
+    {
+        "language_pair": "bg-ru",
+        "count": 172
+    },
+    {
+        "language_pair": "el-en",
+        "count": 171
+    },
+    {
+        "language_pair": "en-it",
+        "count": 171
+    },
+    {
+        "language_pair": "en-nl",
+        "count": 165
+    },
+    {
+        "language_pair": "el-hr",
+        "count": 163
+    },
+    {
+        "language_pair": "en-ru",
+        "count": 154
+    },
+    {
+        "language_pair": "pt-ro",
+        "count": 152
+    },
+    {
+        "language_pair": "de-fr",
+        "count": 148
+    },
+    {
+        "language_pair": "es-pt",
+        "count": 141
+    },
+    {
+        "language_pair": "bg-hr",
+        "count": 140
+    },
+    {
+        "language_pair": "en-hu",
+        "count": 136
+    },
+    {
+        "language_pair": "it-pt",
+        "count": 136
+    },
+    {
+        "language_pair": "es-it",
+        "count": 133
+    },
+    {
+        "language_pair": "hr-it",
+        "count": 133
+    },
+    {
+        "language_pair": "el-ru",
+        "count": 128
+    },
+    {
+        "language_pair": "de-it",
+        "count": 124
+    },
+    {
+        "language_pair": "es-fr",
+        "count": 122
+    },
+    {
+        "language_pair": "hr-pt",
+        "count": 120
+    },
+    {
+        "language_pair": "en-sk",
+        "count": 117
+    },
+    {
+        "language_pair": "es-ro",
+        "count": 114
+    },
+    {
+        "language_pair": "hr-sk",
+        "count": 114
+    },
+    {
+        "language_pair": "el-it",
+        "count": 112
+    },
+    {
+        "language_pair": "el-fr",
+        "count": 109
+    },
+    {
+        "language_pair": "hr-mk",
+        "count": 109
+    },
+    {
+        "language_pair": "fr-hr",
+        "count": 109
+    },
+    {
+        "language_pair": "de-hr",
+        "count": 108
+    },
+    {
+        "language_pair": "bg-el",
+        "count": 108
+    },
+    {
+        "language_pair": "it-ro",
+        "count": 107
+    },
+    {
+        "language_pair": "hr-hu",
+        "count": 106
+    },
+    {
+        "language_pair": "fr-nl",
+        "count": 99
+    },
+    {
+        "language_pair": "bg-en",
+        "count": 98
+    },
+    {
+        "language_pair": "es-hr",
+        "count": 96
+    },
+    {
+        "language_pair": "ro-sk",
+        "count": 96
+    },
+    {
+        "language_pair": "de-el",
+        "count": 94
+    },
+    {
+        "language_pair": "de-hu",
+        "count": 93
+    },
+    {
+        "language_pair": "hu-ru",
+        "count": 93
+    },
+    {
+        "language_pair": "nl-ro",
+        "count": 92
+    },
+    {
+        "language_pair": "de-nl",
+        "count": 90
+    },
+    {
+        "language_pair": "de-ru",
+        "count": 84
+    },
+    {
+        "language_pair": "fr-ru",
+        "count": 83
+    },
+    {
+        "language_pair": "pl-ro",
+        "count": 81
+    },
+    {
+        "language_pair": "ru-sk",
+        "count": 80
+    },
+    {
+        "language_pair": "de-pt",
+        "count": 78
+    },
+    {
+        "language_pair": "en-pl",
+        "count": 77
+    },
+    {
+        "language_pair": "de-es",
+        "count": 77
+    },
+    {
+        "language_pair": "pt-ru",
+        "count": 76
+    },
+    {
+        "language_pair": "el-es",
+        "count": 75
+    },
+    {
+        "language_pair": "it-ru",
+        "count": 73
+    },
+    {
+        "language_pair": "cs-en",
+        "count": 73
+    },
+    {
+        "language_pair": "it-nl",
+        "count": 72
+    },
+    {
+        "language_pair": "de-sk",
+        "count": 71
+    },
+    {
+        "language_pair": "el-pt",
+        "count": 69
+    },
+    {
+        "language_pair": "pl-ru",
+        "count": 65
+    },
+    {
+        "language_pair": "hu-sk",
+        "count": 65
+    },
+    {
+        "language_pair": "cs-sk",
+        "count": 64
+    },
+    {
+        "language_pair": "cs-hr",
+        "count": 62
+    },
+    {
+        "language_pair": "fr-hu",
+        "count": 62
+    },
+    {
+        "language_pair": "bg-de",
+        "count": 61
+    },
+    {
+        "language_pair": "hr-nl",
+        "count": 60
+    },
+    {
+        "language_pair": "cs-de",
+        "count": 60
+    },
+    {
+        "language_pair": "el-sk",
+        "count": 59
+    },
+    {
+        "language_pair": "hu-it",
+        "count": 58
+    },
+    {
+        "language_pair": "es-nl",
+        "count": 55
+    },
+    {
+        "language_pair": "nl-pt",
+        "count": 53
+    },
+    {
+        "language_pair": "de-pl",
+        "count": 53
+    },
+    {
+        "language_pair": "bg-fr",
+        "count": 53
+    },
+    {
+        "language_pair": "cs-ro",
+        "count": 52
+    },
+    {
+        "language_pair": "es-hu",
+        "count": 46
+    },
+    {
+        "language_pair": "el-hu",
+        "count": 45
+    },
+    {
+        "language_pair": "hr-pl",
+        "count": 45
+    },
+    {
+        "language_pair": "el-nl",
+        "count": 44
+    },
+    {
+        "language_pair": "cs-el",
+        "count": 44
+    },
+    {
+        "language_pair": "cs-ru",
+        "count": 43
+    },
+    {
+        "language_pair": "cs-it",
+        "count": 40
+    },
+    {
+        "language_pair": "es-ru",
+        "count": 40
+    },
+    {
+        "language_pair": "bg-sk",
+        "count": 40
+    },
+    {
+        "language_pair": "fr-sk",
+        "count": 40
+    },
+    {
+        "language_pair": "bg-pl",
+        "count": 40
+    },
+    {
+        "language_pair": "bg-hu",
+        "count": 37
+    },
+    {
+        "language_pair": "nl-ru",
+        "count": 36
+    },
+    {
+        "language_pair": "it-sk",
+        "count": 36
+    },
+    {
+        "language_pair": "hu-pl",
+        "count": 34
+    },
+    {
+        "language_pair": "cs-fr",
+        "count": 34
+    },
+    {
+        "language_pair": "nl-sk",
+        "count": 34
+    },
+    {
+        "language_pair": "pl-sk",
+        "count": 33
+    },
+    {
+        "language_pair": "bg-it",
+        "count": 33
+    },
+    {
+        "language_pair": "da-en",
+        "count": 32
+    },
+    {
+        "language_pair": "pl-pt",
+        "count": 32
+    },
+    {
+        "language_pair": "cs-hu",
+        "count": 31
+    },
+    {
+        "language_pair": "hu-pt",
+        "count": 31
+    },
+    {
+        "language_pair": "es-sk",
+        "count": 29
+    },
+    {
+        "language_pair": "bg-pt",
+        "count": 29
+    },
+    {
+        "language_pair": "el-pl",
+        "count": 29
+    },
+    {
+        "language_pair": "cs-pt",
+        "count": 28
+    },
+    {
+        "language_pair": "bg-es",
+        "count": 28
+    },
+    {
+        "language_pair": "bg-cs",
+        "count": 27
+    },
+    {
+        "language_pair": "pt-sk",
+        "count": 26
+    },
+    {
+        "language_pair": "fr-pl",
+        "count": 25
+    },
+    {
+        "language_pair": "cs-nl",
+        "count": 24
+    },
+    {
+        "language_pair": "it-pl",
+        "count": 24
+    },
+    {
+        "language_pair": "hu-nl",
+        "count": 23
+    },
+    {
+        "language_pair": "cs-pl",
+        "count": 23
+    },
+    {
+        "language_pair": "cs-es",
+        "count": 22
+    },
+    {
+        "language_pair": "bg-nl",
+        "count": 22
+    },
+    {
+        "language_pair": "mk-ru",
+        "count": 20
+    },
+    {
+        "language_pair": "es-pl",
+        "count": 16
+    },
+    {
+        "language_pair": "bg-mk",
+        "count": 15
+    },
+    {
+        "language_pair": "nl-pl",
+        "count": 14
+    },
+    {
+        "language_pair": "el-mk",
+        "count": 12
+    },
+    {
+        "language_pair": "mk-ro",
+        "count": 12
+    },
+    {
+        "language_pair": "en-mk",
+        "count": 11
+    },
+    {
+        "language_pair": "da-ro",
+        "count": 11
+    },
+    {
+        "language_pair": "da-fr",
+        "count": 10
+    },
+    {
+        "language_pair": "da-hr",
+        "count": 9
+    },
+    {
+        "language_pair": "de-et",
+        "count": 9
+    },
+    {
+        "language_pair": "et-ro",
+        "count": 8
+    },
+    {
+        "language_pair": "da-de",
+        "count": 7
+    },
+    {
+        "language_pair": "en-et",
+        "count": 7
+    },
+    {
+        "language_pair": "et-ru",
+        "count": 6
+    },
+    {
+        "language_pair": "ca-es",
+        "count": 6
+    },
+    {
+        "language_pair": "et-hr",
+        "count": 5
+    },
+    {
+        "language_pair": "da-pl",
+        "count": 5
+    },
+    {
+        "language_pair": "da-es",
+        "count": 5
+    },
+    {
+        "language_pair": "da-sk",
+        "count": 5
+    },
+    {
+        "language_pair": "da-it",
+        "count": 5
+    },
+    {
+        "language_pair": "da-hu",
+        "count": 5
+    },
+    {
+        "language_pair": "hu-mk",
+        "count": 5
+    },
+    {
+        "language_pair": "da-ru",
+        "count": 4
+    },
+    {
+        "language_pair": "fr-mk",
+        "count": 4
+    },
+    {
+        "language_pair": "da-el",
+        "count": 4
+    },
+    {
+        "language_pair": "cs-mk",
+        "count": 4
+    },
+    {
+        "language_pair": "bg-et",
+        "count": 4
+    },
+    {
+        "language_pair": "es-et",
+        "count": 4
+    },
+    {
+        "language_pair": "de-mk",
+        "count": 3
+    },
+    {
+        "language_pair": "et-sk",
+        "count": 3
+    },
+    {
+        "language_pair": "da-nl",
+        "count": 3
+    },
+    {
+        "language_pair": "el-et",
+        "count": 3
+    },
+    {
+        "language_pair": "mk-pl",
+        "count": 3
+    },
+    {
+        "language_pair": "es-mk",
+        "count": 3
+    },
+    {
+        "language_pair": "it-mk",
+        "count": 3
+    },
+    {
+        "language_pair": "et-pt",
+        "count": 3
+    },
+    {
+        "language_pair": "da-pt",
+        "count": 2
+    },
+    {
+        "language_pair": "ca-ro",
+        "count": 2
+    },
+    {
+        "language_pair": "mk-nl",
+        "count": 2
+    },
+    {
+        "language_pair": "ar-el",
+        "count": 2
+    },
+    {
+        "language_pair": "et-fr",
+        "count": 2
+    },
+    {
+        "language_pair": "ar-hr",
+        "count": 2
+    },
+    {
+        "language_pair": "et-nl",
+        "count": 2
+    },
+    {
+        "language_pair": "mk-sk",
+        "count": 2
+    },
+    {
+        "language_pair": "et-it",
+        "count": 2
+    },
+    {
+        "language_pair": "ca-pt",
+        "count": 2
+    },
+    {
+        "language_pair": "et-hu",
+        "count": 2
+    },
+    {
+        "language_pair": "cs-da",
+        "count": 1
+    },
+    {
+        "language_pair": "ar-es",
+        "count": 1
+    },
+    {
+        "language_pair": "bg-da",
+        "count": 1
+    },
+    {
+        "language_pair": "ar-en",
+        "count": 1
+    },
+    {
+        "language_pair": "es-tr",
+        "count": 1
+    },
+    {
+        "language_pair": "cs-et",
+        "count": 1
+    },
+    {
+        "language_pair": "hr-sq",
+        "count": 1
+    },
+    {
+        "language_pair": "en-sl",
+        "count": 1
+    },
+    {
+        "language_pair": "ar-nl",
+        "count": 1
+    },
+    {
+        "language_pair": "ar-ro",
+        "count": 1
+    },
+    {
+        "language_pair": "et-pl",
+        "count": 1
+    },
+    {
+        "language_pair": "da-mk",
+        "count": 1
+    },
+    {
+        "language_pair": "ca-en",
+        "count": 1
+    },
+    {
+        "language_pair": "ar-pl",
+        "count": 1
+    },
+    {
+        "language_pair": "mk-pt",
+        "count": 1
+    },
+    {
+        "language_pair": "ar-ru",
+        "count": 1
+    },
+    {
+        "language_pair": "en-no",
+        "count": 1
+    },
+    {
+        "language_pair": "ca-it",
+        "count": 1
+    }
+]

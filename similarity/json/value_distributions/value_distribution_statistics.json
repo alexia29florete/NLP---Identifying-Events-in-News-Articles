@@ -1,0 +1,48 @@
+{
+    "same_language_pairs": 23005,
+    "different_language_pairs": 12097,
+    "normalized_edit_distance": {
+        "count": 23005,
+        "mean": 0.5874,
+        "standard_deviation": 0.285,
+        "minimum": 0.0,
+        "percentile_25": 0.5015,
+        "median": 0.7304,
+        "percentile_75": 0.7695,
+        "maximum": 0.9883
+    },
+    "multilingual_similarity": {
+        "count": 12097,
+        "mean": 0.8194,
+        "standard_deviation": 0.0865,
+        "minimum": -0.1083,
+        "percentile_25": 0.786,
+        "median": 0.8309,
+        "percentile_75": 0.8698,
+        "maximum": 0.9893
+    },
+    "different_language_temporal_distance": {
+        "count": 12097,
+        "mean_days": 23.58,
+        "standard_deviation_days": 73.37,
+        "minimum_days": 0.0,
+        "percentile_25_days": 0.24,
+        "median_days": 1.04,
+        "percentile_75_days": 12.79,
+        "maximum_days": 2458.55
+    },
+    "different_language_categories": {
+        "possible_literal_translation": {
+            "count": 1295,
+            "percentage": 10.71
+        },
+        "similar_cross_language_news": {
+            "count": 9158,
+            "percentage": 75.7
+        },
+        "different_cross_language_news": {
+            "count": 1644,
+            "percentage": 13.59
+        }
+    }
+}

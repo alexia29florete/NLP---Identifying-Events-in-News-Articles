@@ -5,3 +5,4 @@ rapidfuzz
 langdetect
 sentence-transformers
 nltk
+pandas

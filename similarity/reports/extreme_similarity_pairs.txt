@@ -1,0 +1,43 @@
+MAXIMUM MULTILINGUAL SIMILARITY
+================================
+Score: 0.9893044233322144
+Languages: hr - mk
+Regions: RS - RS
+Temporal distance: 0.17 days
+Title 1: Mali poručio: Krajem novembra će se na sednici Skupštine Srbije odlučivati o važnom pitanju - evo o čemu se radi
+Title 2: Мали: Очекујем да буџет за наредну годину буде на седници Скупштине крајем новембра
+
+Content 1:
+Ministar finansija Siniša Mali izjavio je da se dve i po nedelje radi na pripremi budžeta za sledeću godinu i da očekuje da predlog na Vladi Srbije bude usvojen prve nedelje novembra, a da se na dnevnom redu Skupštine Srbije nađe poslednje nedelje novembra.
+
+On je na predstavljanju prvog budžetskog portala, odnosno nove platforme koja će građanima približiti proces pripreme budžeta, rekao da se novi budžet priprema u teškim uslovima a da nova platforma već može da se koristi.
+- Ovo je platforma koja po prvi put omogućava građanima da daju svoje predloge i da na taj način učestvuju u kreiranju budžeta - rekao je on i dodao da na ovaj način transparentnost u upravljanju javnim finansijama više nije samo fraza već temelj dobrog upravljanja i demokratije.
+Naveo je da platforma pomaže građanima Srbije da razumeju šta je u budžetu, šta su prihodi, šta su rashodi, na koji način se budžet koristi i naglasio da je najvažnije da građani budu ti koji mogu da daju predloge kako i na koji način da 
+
+Content 2:
+Министар финансија Синиша Мали изјавио је данас да се две и по недеље ради на припреми буџета за следећу годину и да очекује да предлог на Влади Србије буде усвојен прве недеље новембра, а да се на дневном реду Скупштине Србије нађе последње недеље новембра.
+
+Он је на представљању првог буџетског портала, односно нове платформе која ће грађанима приближити процес припреме буџета, рекао да се нови буџет припрема у тешким условима а да нова платформа већ може да се користи.
+
+"Ово је платформа која по први пут омогућава грађанима да дају своје предлоге и да на тај начин учествују у креирању буџета", рекао је он и додао да на овај начин транспарентност у управљању јавним финансијама више није само фраза већ темељ доброг управљања и демократије.
+
+Као веома важно навео је то да је у буџетски портал интегрисан иновативни алат а то је дигитални асистент заснован на вештачкој интелигенцији.
+
+Према његовим речима, ово је први пут да се у припрему укључује вештачка интелигенција а дигитални асист
+
+MINIMUM MULTILINGUAL SIMILARITY
+================================
+Score: -0.10830576717853546
+Languages: fr - ro
+Regions: FR - RO
+Temporal distance: 101.7 days
+Title 1: Etats-Unis : Trump assure être proche d’un accord à 500 millions de dollars avec Harvard
+Title 2: Trump anunță un posibil acord cu Harvard pentru rezolvarea disputelor juridice: „Au acționat extrem de adecvat”
+
+Content 1:
+Trump a indiqué que l’accord n’était pas encore finalisé mais qu’il inclurait un rôle actif de Harvard dans la gestion d’écoles de formation professionnelle
+
+Content 2:
+<p><img width="803" height="535" src="https://media.alephnews.ro/2025/06/pipe-1-1024x682.jpg" alt="" decoding="async" loading="lazy" srcset="https://media.alephnews.ro/2025/06/pipe-1-1024x682.jpg 1024w, https://media.alephnews.ro/2025/06/pipe-1-300x200.jpg 300w, https://media.alephnews.ro/2025/06/pipe-1-768x512.jpg 768w, https://media.alephnews.ro/2025/06/pipe-1-1536x1024.jpg 1536w, https://media.alephnews.ro/2025/06/pipe-1-2048x1365.jpg 2048w" sizes="(max-width: 803px) 100vw, 803px" />Președintele Donald Trump a declarat vineri că Harvard a „acționat extrem de adecvat” în timpul negocierilor care ar putea duce în curând la încheierea unui acord, semnalând o posibilă schimbare majoră în eforturile administrației sale de a viza universitatea, scrie CNN. O posibilă schimbare în relația Trump-Harvard „Mulți oameni au întrebat ce se întâmplă cu [&#8230;]</p>
+<p>The post <a rel="nofollow" href="https://alephnews.ro/justitie/trump-anunta-un-posibil-acord-cu-harvard-pentru-rezolvarea-disputelor-juridice-au-actionat-extrem-de-adecvat/">Trump anunță un posibil acord cu Harvard pentru rezolvarea disputelor juridice: „Au acționat extrem de adecvat”</a> appeared first on <a rel="nofollow" href="https://alephnews.ro">Aleph News</a>.</p>
+
