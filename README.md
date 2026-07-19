@@ -220,3 +220,9 @@ Evaluating extreme similarity instances exposes critical edge cases and systemic
 *   **Cosine Score:** $-0.1083$ | **Temporal Delta:** $\approx 101.70\text{ days}$
 *   **Linguistic Mapping:** French (`fr`) vs. Romanian (`ro`).
 *   **Diagnostic Inspection:** While both documents share a baseline semantic entity (e.g., "Donald Trump/Harvard University"), severe format discrepancies led to an artificial drop in vector alignment. Document $d_1$ was an compressed, abstract summary, while document $d_2$ suffered from uncleaned HTML boilerplate, styling elements, and WordPress metadata injections. This demonstrates that document-level pooling remains highly sensitive to uncleaned structural noise.
+
+---
+
+detectăm limba articolului cu langdetect, folosim tokenizerul NLTK corespunzător atunci când limba este suportată, iar pentru celelalte limbi folosim fallback cu regex.
+
+Asta este mai corect metodologic decât să aplicăm tokenizerul implicit de engleză tuturor limbilor.

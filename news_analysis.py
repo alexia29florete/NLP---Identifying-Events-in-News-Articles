@@ -211,7 +211,7 @@ os.makedirs("similarity/reports", exist_ok=True)
 os.makedirs("similarity/graphical_representation/value_distributions", exist_ok=True)
 os.makedirs("similarity/graphical_representation/different_language", exist_ok=True)
 os.makedirs("similarity/json/value_distributions", exist_ok=True)
-os.makedirs("similarity/reports/value_distributions", exist_ok=True)
+# os.makedirs("similarity/reports/value_distributions", exist_ok=True)
 
 with open("similarity/reports/similarity_summary.txt", "w", encoding="utf-8") as file:
     file.write("Pairs classified as Yes: " + str(len(similar_news)) + "\n")
@@ -465,7 +465,9 @@ plt.figure(figsize=(10, 6))
 plt.hist(
     normalized_edit_distances,
     bins=30,
-    edgecolor="black"
+    color="skyblue",
+    edgecolor="black",
+    alpha=0.7
 )
 
 plt.title("Distributia distantei Levenshtein normalizate")
@@ -794,10 +796,7 @@ with open("similarity/json/value_distributions/value_distribution_statistics.jso
 
 plt.figure(figsize=(8, 6))
 
-plt.boxplot(
-    multilingual_similarities,
-    vert=True
-)
+plt.boxplot(multilingual_similarities, orientation="vertical")
 
 plt.title("Boxplot pentru similaritatea stirilor in limbi diferite")
 plt.ylabel("Cosine similarity")

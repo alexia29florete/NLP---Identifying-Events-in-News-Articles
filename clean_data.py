@@ -196,50 +196,37 @@ for article_id in articles:
     content = articles[article_id]["content"]
     region = articles[article_id]["region"]
 
-    content_is_empty = empty_text(content)
-    content_is_corrupted = corrupted_text(content)
-    content_is_code = code_text(content)
-    content_is_video = video_text(content)
+    # daca nu exista continut, folosesc titlul
+    if empty_text(content):
+        text = title
+    else:
+        text = content
 
-    title_is_valid = valid_text(title)
-
-    content_language = detect_language(content)
-    title_language = detect_language(title)
+    text_is_corrupted = corrupted_text(text)
+    language = detect_language(text)
 
     invalid_article = False
     invalid_reason = ""
 
-    # continut corupt -> elimin indiferent de titlu
-    if content_is_corrupted:
+    # elimin articolele cu peste 10% caractere corupte
+    if text_is_corrupted:
         invalid_article = True
         invalid_reason = "corrupted_content"
 
-    # continut format din cod JavaScript / reclama
-    elif content_is_code:
+    # elimin articolele pentru care limba nu poate fi detectata
+    elif language == "unknown":
         invalid_article = True
-        invalid_reason = "code_content"
-
-    # continut format doar dintr-un link catre un videoclip
-    elif content_is_video:
-        invalid_article = True
-        invalid_reason = "video_only_content"
-
-    # continut gol si titlu invalid
-    elif content_is_empty and title_is_valid == False:
-        invalid_article = True
-        invalid_reason = "empty_content_and_invalid_title"
+        invalid_reason = "unknown_language"
 
     if invalid_article:
         invalid_article_ids.add(article_id)
 
-    if (invalid_article or content_language == "unknown" or title_language == "unknown" or content_language == "bn" or title_language == "bn"):
         suspicious_articles.append({
             "id": article_id,
             "region": region,
-            "will_be_removed": invalid_article,
+            "will_be_removed": True,
             "invalid_reason": invalid_reason,
-            "title_language": title_language,
-            "content_language": content_language,
+            "language": language,
             "title_length": len(title) if title is not None else 0,
             "content_length": len(content) if content is not None else 0,
             "title": title,
@@ -332,7 +319,7 @@ for article_id in cleaned_articles:
     if region == "HU" and language == "id":
         language = "hu"
 
-    if language == "unknown" or language == "bn":
+    if language == "unknown":
         continue
 
     if region not in languages_by_region:

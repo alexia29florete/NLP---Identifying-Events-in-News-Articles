@@ -1,9 +1,9 @@
 {
     "AT": {
-        "total_articles": 4505,
+        "total_articles": 4504,
         "languages": {
             "de": {
-                "count": 4448,
+                "count": 4447,
                 "percentage": 98.73
             },
             "et": {
@@ -189,11 +189,15 @@
         }
     },
     "RU": {
-        "total_articles": 16677,
+        "total_articles": 16706,
         "languages": {
             "ru": {
                 "count": 16663,
-                "percentage": 99.92
+                "percentage": 99.74
+            },
+            "en": {
+                "count": 29,
+                "percentage": 0.17
             },
             "bg": {
                 "count": 10,
