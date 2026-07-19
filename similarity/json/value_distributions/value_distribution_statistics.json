@@ -1,13 +1,13 @@
 {
-    "same_language_pairs": 23005,
+    "same_language_pairs": 23022,
     "different_language_pairs": 12097,
     "normalized_edit_distance": {
-        "count": 23005,
-        "mean": 0.5874,
-        "standard_deviation": 0.285,
+        "count": 23022,
+        "mean": 0.587,
+        "standard_deviation": 0.2854,
         "minimum": 0.0,
         "percentile_25": 0.5015,
-        "median": 0.7304,
+        "median": 0.7302,
         "percentile_75": 0.7695,
         "maximum": 0.9883
     },

@@ -1,7 +1,7 @@
-Pairs classified as Yes: 35102
-trivial_duplicate: 3071 pairs, 8.75%
+Pairs classified as Yes: 35119
+trivial_duplicate: 3088 pairs, 8.79%
 near_duplicate: 1095 pairs, 3.12%
-different_news_same_event: 18839 pairs, 53.67%
+different_news_same_event: 18839 pairs, 53.64%
 possible_literal_translation: 1295 pairs, 3.69%
-similar_cross_language_news: 9158 pairs, 26.09%
+similar_cross_language_news: 9158 pairs, 26.08%
 different_cross_language_news: 1644 pairs, 4.68%
