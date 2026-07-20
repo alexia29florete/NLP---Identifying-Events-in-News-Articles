@@ -33,6 +33,9 @@ def detect_language(text):
 
 def get_text(content, title):
     if empty_text(content):
+        if title is None:
+            return ""
+
         return title
 
     return content
@@ -103,6 +106,17 @@ def calculate_statistics(series):
 
     return statistics
 
+def add_bar_percentages(bars):
+    for bar in bars:
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width() / 2, height + 0.5, str(round(height, 2)) + "%", ha="center", va="bottom")
+
+
+def add_bar_values(bars):
+    for bar in bars:
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width() / 2, height, str(round(height, 2)), ha="center", va="bottom")
+
 data = []
 with open("ai_classification_cleaned.jsonl", "r", encoding="utf-8") as file:
     for line in file:
@@ -128,23 +142,94 @@ for elem in data:
     maximum_length = max(length1, length2)
     minimum_length = min(length1, length2)
 
+    elem["language1_length_analysis"] = language1
+    elem["language2_length_analysis"] = language2
+
     elem["length1"] = length1
     elem["length2"] = length2
     
     length_difference = abs(length1 - length2)
+
     if maximum_length == 0:
         relative_length_difference = 0
+        length_ratio = 1
     else:
         relative_length_difference = length_difference / maximum_length
+        length_ratio = minimum_length / maximum_length
     
     if length1 == length2:
         same_length = True
     else:
         same_length = False
 
+    if relative_length_difference <= 0.05:
+        similar_length_5_percent = True
+    else:
+        similar_length_5_percent = False
+
+    if relative_length_difference <= 0.10:
+        similar_length_10_percent = True
+    else:
+        similar_length_10_percent = False
+
+    if relative_length_difference <= 0.20:
+        similar_length_20_percent = True
+    else:
+        similar_length_20_percent = False
+
+    if length1 == 1000 and length2 == 1000:
+        both_lengths_1000 = True
+    else:
+        both_lengths_1000 = False
+
+    if length1 == 1000 or length2 == 1000:
+        at_least_one_length_1000 = True
+    else:
+        at_least_one_length_1000 = False
+
+    sentence_count1 = count_sentences(content1, language1)
+    sentence_count2 = count_sentences(content2, language2)
+
+    average_sentence_count = (sentence_count1 + sentence_count2) / 2
+    maximum_sentence_count = max(sentence_count1, sentence_count2)
+    minimum_sentence_count = min(sentence_count1, sentence_count2)
+    sentence_count_difference = abs(sentence_count1 - sentence_count2)
+
+    if maximum_sentence_count == 0:
+        relative_sentence_count = 0
+        sentence_count_ratio = 1
+    else:
+        relative_sentence_count = sentence_count_difference / maximum_sentence_count
+        sentence_count_ratio = minimum_sentence_count / maximum_sentence_count
+
+    if sentence_count1 == sentence_count2:
+        same_sentence_count = True
+    else:
+        same_sentence_count = False
+
+    elem["average_length"] = average_length
+
     elem["length_difference"] = length_difference
-    elem["relative_length_difference"] = relative_length_difference
+    elem["relative_length_difference"] = (relative_length_difference)
+    elem["length_ratio"] = length_ratio
+
     elem["same_length"] = same_length
+    elem["similar_length_5_percent"] = (similar_length_5_percent)
+    elem["similar_length_10_percent"] = (similar_length_10_percent)
+    elem["similar_length_20_percent"] = (similar_length_20_percent)
+
+    elem["both_lengths_1000"] = both_lengths_1000
+    elem["at_least_one_length_1000"] = (at_least_one_length_1000)
+
+    elem["sentence_count1"] = sentence_count1
+    elem["sentence_count2"] = sentence_count2
+
+    elem["average_sentence_count"] = (average_sentence_count)
+    elem["sentence_count_difference"] = (sentence_count_difference)
+    elem["relative_sentence_difference"] = (relative_sentence_count)
+
+    elem["sentence_count_ratio"] = sentence_count_ratio
+    elem["same_sentence_count"] = same_sentence_count
 
 with open("length_correlation/ai_classification_with_length.jsonl", "w", encoding="utf-8") as file:
     for elem in data:
@@ -159,28 +244,591 @@ no_length_differences = []
 yes_relative_length_differences = []
 no_relative_length_differences = []
 
+yes_sentence_counts = []
+no_sentence_counts = []
+
+yes_sentence_differences = []
+no_sentence_differences = []
+
+yes_relative_sentence_differences = []
+no_relative_sentence_differences = []
+
 same_length_yes = 0
 same_length_no = 0
+
+similar_length_5_yes = 0
+similar_length_5_no = 0
+
+similar_length_10_yes = 0
+similar_length_10_no = 0
+
+similar_length_20_yes = 0
+similar_length_20_no = 0
+
+both_lengths_1000_yes = 0
+both_lengths_1000_no = 0
+
+at_least_one_length_1000_yes = 0
+at_least_one_length_1000_no = 0
+
+same_sentence_count_yes = 0
+same_sentence_count_no = 0
+
+yes_total = 0
+no_total = 0
 
 for elem in data:
     length1 = elem["length1"]
     length2 = elem["length2"]
     average_length = (length1 + length2) / 2
+    average_sentence_count = (elem["sentence_count1"] + elem["sentence_count2"]) / 2
 
     label = elem["classification_openai/gpt-oss-120b_v1"]
     if label == "Yes":
+        yes_total = yes_total + 1
         yes_average_lengths.append(average_length)
         yes_length_differences.append(elem["length_difference"])
         yes_relative_length_differences.append(elem["relative_length_difference"])
+        yes_sentence_counts.append(average_sentence_count)
+        yes_sentence_differences.append(elem["sentence_count_difference"])
+        yes_relative_sentence_differences.append(elem["relative_sentence_difference"])
 
         if elem["same_length"] == True:
             same_length_yes = same_length_yes + 1
+        if elem["similar_length_5_percent"] == True:
+            similar_length_5_yes = similar_length_5_yes + 1
+        if elem["similar_length_10_percent"] == True:
+            similar_length_10_yes = similar_length_10_yes + 1
+        if elem["similar_length_20_percent"] == True:
+            similar_length_20_yes = similar_length_20_yes + 1
+        if elem["both_lengths_1000"] == True:
+            both_lengths_1000_yes = both_lengths_1000_yes + 1
+        if elem["at_least_one_length_1000"] == True:
+            at_least_one_length_1000_yes = at_least_one_length_1000_yes + 1
+        if elem["same_sentence_count"] == True:
+            same_sentence_count_yes = same_sentence_count_yes + 1
 
     elif label == "No":
+        no_total = no_total + 1
         no_average_lengths.append(average_length)
-        no_average_lengths.append(elem["length_difference"])
+        no_length_differences.append(elem["length_difference"])
         no_relative_length_differences.append(elem["relative_length_difference"])
+        no_sentence_counts.append(average_sentence_count)
+        no_sentence_differences.append(elem["sentence_count_difference"])
+        no_relative_sentence_differences.append(elem["relative_sentence_difference"])
 
-        if elem["same_length"] == False:
+        if elem["same_length"] == True:
             same_length_no = same_length_no + 1
+        if elem["similar_length_5_percent"] == True:
+            similar_length_5_no = similar_length_5_no + 1
+        if elem["similar_length_10_percent"] == True:
+            similar_length_10_no = similar_length_10_no + 1
+        if elem["similar_length_20_percent"] == True:
+            similar_length_20_no = similar_length_20_no + 1
+        if elem["both_lengths_1000"] == True:
+            both_lengths_1000_no = both_lengths_1000_no + 1
+        if elem["at_least_one_length_1000"] == True:
+            at_least_one_length_1000_no = at_least_one_length_1000_no + 1
+        if elem["same_sentence_count"] == True:
+            same_sentence_count_no = same_sentence_count_no + 1
 
+yes_average_lengths_series = pd.Series(yes_average_lengths, dtype=float)
+no_average_lengths_series = pd.Series(no_average_lengths, dtype=float)
+
+yes_length_differences_series = pd.Series(yes_length_differences, dtype=float)
+no_length_differences_series = pd.Series(no_length_differences, dtype=float)
+
+yes_relative_length_differences_series = pd.Series(yes_relative_length_differences, dtype=float)
+no_relative_length_differences_series = pd.Series(no_relative_length_differences, dtype=float)
+
+yes_sentence_counts_series = pd.Series(yes_sentence_counts, dtype=float)
+no_sentence_counts_series = pd.Series(no_sentence_counts, dtype=float)
+
+yes_sentence_differences_series = pd.Series(yes_sentence_differences, dtype=float)
+no_sentence_differences_series = pd.Series(no_sentence_differences, dtype=float)
+
+yes_relative_sentence_differences_series = pd.Series(yes_relative_sentence_differences, dtype=float)
+no_relative_sentence_differences_series = pd.Series(no_relative_sentence_differences, dtype=float)
+
+yes_average_length_statistics = calculate_statistics(yes_average_lengths_series)
+no_average_length_statistics = calculate_statistics(no_average_lengths_series)
+
+yes_length_difference_statistics = calculate_statistics(yes_length_differences_series)
+no_length_difference_statistics = calculate_statistics(no_length_differences_series)
+
+yes_relative_length_difference_statistics = calculate_statistics(yes_relative_length_differences_series)
+no_relative_length_difference_statistics = calculate_statistics(no_relative_length_differences_series)
+
+yes_sentence_count_statistics = calculate_statistics(yes_sentence_counts_series)
+no_sentence_count_statistics = calculate_statistics(no_sentence_counts_series)
+
+yes_sentence_difference_statistics = calculate_statistics(yes_sentence_differences_series)
+no_sentence_difference_statistics = calculate_statistics(no_sentence_differences_series)
+
+yes_relative_sentence_difference_statistics = calculate_statistics(yes_relative_sentence_differences_series)
+no_relative_sentence_difference_statistics = calculate_statistics(no_relative_sentence_differences_series)
+
+
+same_length_yes_percentage = calculate_percentage(same_length_yes, yes_total)
+same_length_no_percentage = calculate_percentage(same_length_no, no_total)
+
+similar_length_5_yes_percentage = calculate_percentage(similar_length_5_yes, yes_total)
+similar_length_5_no_percentage = calculate_percentage(similar_length_5_no, no_total)
+
+similar_length_10_yes_percentage = calculate_percentage(similar_length_10_yes, yes_total)
+similar_length_10_no_percentage = calculate_percentage(similar_length_10_no, no_total)
+
+similar_length_20_yes_percentage = calculate_percentage(similar_length_20_yes, yes_total)
+similar_length_20_no_percentage = calculate_percentage(similar_length_20_no, no_total)
+
+both_lengths_1000_yes_percentage = calculate_percentage(both_lengths_1000_yes, yes_total)
+both_lengths_1000_no_percentage = calculate_percentage(both_lengths_1000_no, no_total)
+
+at_least_one_length_1000_yes_percentage = calculate_percentage(at_least_one_length_1000_yes, yes_total)
+at_least_one_length_1000_no_percentage = calculate_percentage(at_least_one_length_1000_no, no_total)
+
+same_sentence_count_yes_percentage = calculate_percentage(same_sentence_count_yes, yes_total)
+same_sentence_count_no_percentage = calculate_percentage(same_sentence_count_no, no_total)
+
+
+same_length_without_1000_yes = same_length_yes - both_lengths_1000_yes
+same_length_without_1000_no = same_length_no - both_lengths_1000_no
+
+yes_without_both_1000_total = yes_total - both_lengths_1000_yes
+no_without_both_1000_total = no_total - both_lengths_1000_no
+
+same_length_without_1000_yes_percentage = calculate_percentage(same_length_without_1000_yes, yes_without_both_1000_total)
+same_length_without_1000_no_percentage = calculate_percentage(same_length_without_1000_no, no_without_both_1000_total)
+
+
+correlation_data = []
+
+for elem in data:
+    label = elem["classification_openai/gpt-oss-120b_v1"]
+
+    if label == "Yes":
+        label_numeric = 1
+    else:
+        label_numeric = 0
+
+    correlation_data.append({
+        "label_numeric": label_numeric,
+        "average_length": elem["average_length"],
+        "length_difference": elem["length_difference"],
+        "relative_length_difference": elem["relative_length_difference"],
+        "average_sentence_count": elem["average_sentence_count"],
+        "sentence_count_difference": elem["sentence_count_difference"],
+        "relative_sentence_difference": elem["relative_sentence_difference"]
+    })
+
+
+correlation_dataframe = pd.DataFrame(correlation_data)
+
+average_length_correlation = correlation_dataframe["average_length"].corr(correlation_dataframe["label_numeric"])
+length_difference_correlation = correlation_dataframe["length_difference"].corr(correlation_dataframe["label_numeric"])
+relative_length_difference_correlation = correlation_dataframe["relative_length_difference"].corr(correlation_dataframe["label_numeric"])
+
+average_sentence_count_correlation = correlation_dataframe["average_sentence_count"].corr(correlation_dataframe["label_numeric"])
+sentence_count_difference_correlation = correlation_dataframe["sentence_count_difference"].corr(correlation_dataframe["label_numeric"])
+relative_sentence_difference_correlation = correlation_dataframe["relative_sentence_difference"].corr(correlation_dataframe["label_numeric"])
+
+
+correlation_without_1000_data = []
+
+for elem in data:
+    if elem["both_lengths_1000"] == False:
+        label = elem["classification_openai/gpt-oss-120b_v1"]
+
+        if label == "Yes":
+            label_numeric = 1
+        else:
+            label_numeric = 0
+
+        correlation_without_1000_data.append({
+            "label_numeric": label_numeric,
+            "average_length": elem["average_length"],
+            "length_difference": elem["length_difference"],
+            "relative_length_difference": elem["relative_length_difference"],
+            "average_sentence_count": elem["average_sentence_count"],
+            "sentence_count_difference": elem["sentence_count_difference"],
+            "relative_sentence_difference": elem["relative_sentence_difference"]
+        })
+
+
+correlation_without_1000_dataframe = pd.DataFrame(correlation_without_1000_data)
+
+average_length_correlation_without_1000 = correlation_without_1000_dataframe["average_length"].corr(correlation_without_1000_dataframe["label_numeric"])
+length_difference_correlation_without_1000 = correlation_without_1000_dataframe["length_difference"].corr(correlation_without_1000_dataframe["label_numeric"])
+relative_length_difference_correlation_without_1000 = correlation_without_1000_dataframe["relative_length_difference"].corr(correlation_without_1000_dataframe["label_numeric"])
+
+average_sentence_count_correlation_without_1000 = correlation_without_1000_dataframe["average_sentence_count"].corr(correlation_without_1000_dataframe["label_numeric"])
+sentence_count_difference_correlation_without_1000 = correlation_without_1000_dataframe["sentence_count_difference"].corr(correlation_without_1000_dataframe["label_numeric"])
+relative_sentence_difference_correlation_without_1000 = correlation_without_1000_dataframe["relative_sentence_difference"].corr(correlation_without_1000_dataframe["label_numeric"])
+
+
+results = {
+    "pair_counts": {
+        "total": len(data),
+        "yes": yes_total,
+        "no": no_total
+    },
+    "average_length": {
+        "yes": yes_average_length_statistics,
+        "no": no_average_length_statistics
+    },
+    "length_difference": {
+        "yes": yes_length_difference_statistics,
+        "no": no_length_difference_statistics
+    },
+    "relative_length_difference": {
+        "yes": yes_relative_length_difference_statistics,
+        "no": no_relative_length_difference_statistics
+    },
+    "average_sentence_count": {
+        "yes": yes_sentence_count_statistics,
+        "no": no_sentence_count_statistics
+    },
+    "sentence_count_difference": {
+        "yes": yes_sentence_difference_statistics,
+        "no": no_sentence_difference_statistics
+    },
+    "relative_sentence_difference": {
+        "yes": yes_relative_sentence_difference_statistics,
+        "no": no_relative_sentence_difference_statistics
+    },
+    "same_length": {
+        "yes_count": same_length_yes,
+        "yes_percentage": same_length_yes_percentage,
+        "no_count": same_length_no,
+        "no_percentage": same_length_no_percentage
+    },
+    "similar_length_5_percent": {
+        "yes_count": similar_length_5_yes,
+        "yes_percentage": similar_length_5_yes_percentage,
+        "no_count": similar_length_5_no,
+        "no_percentage": similar_length_5_no_percentage
+    },
+    "similar_length_10_percent": {
+        "yes_count": similar_length_10_yes,
+        "yes_percentage": similar_length_10_yes_percentage,
+        "no_count": similar_length_10_no,
+        "no_percentage": similar_length_10_no_percentage
+    },
+    "similar_length_20_percent": {
+        "yes_count": similar_length_20_yes,
+        "yes_percentage": similar_length_20_yes_percentage,
+        "no_count": similar_length_20_no,
+        "no_percentage": similar_length_20_no_percentage
+    },
+    "both_lengths_1000": {
+        "yes_count": both_lengths_1000_yes,
+        "yes_percentage": both_lengths_1000_yes_percentage,
+        "no_count": both_lengths_1000_no,
+        "no_percentage": both_lengths_1000_no_percentage
+    },
+    "at_least_one_length_1000": {
+        "yes_count": at_least_one_length_1000_yes,
+        "yes_percentage": at_least_one_length_1000_yes_percentage,
+        "no_count": at_least_one_length_1000_no,
+        "no_percentage": at_least_one_length_1000_no_percentage
+    },
+    "same_length_without_1000_1000": {
+        "yes_count": same_length_without_1000_yes,
+        "yes_percentage": same_length_without_1000_yes_percentage,
+        "no_count": same_length_without_1000_no,
+        "no_percentage": same_length_without_1000_no_percentage
+    },
+    "same_sentence_count": {
+        "yes_count": same_sentence_count_yes,
+        "yes_percentage": same_sentence_count_yes_percentage,
+        "no_count": same_sentence_count_no,
+        "no_percentage": same_sentence_count_no_percentage
+    },
+    "correlations_with_yes_label": {
+        "average_length": round(average_length_correlation, 4),
+        "length_difference": round(length_difference_correlation, 4),
+        "relative_length_difference": round(relative_length_difference_correlation, 4),
+        "average_sentence_count": round(average_sentence_count_correlation, 4),
+        "sentence_count_difference": round(sentence_count_difference_correlation, 4),
+        "relative_sentence_difference": round(relative_sentence_difference_correlation, 4)
+    },
+    "correlations_without_1000_1000_pairs": {
+        "average_length": round(average_length_correlation_without_1000, 4),
+        "length_difference": round(length_difference_correlation_without_1000, 4),
+        "relative_length_difference": round(relative_length_difference_correlation_without_1000, 4),
+        "average_sentence_count": round(average_sentence_count_correlation_without_1000, 4),
+        "sentence_count_difference": round(sentence_count_difference_correlation_without_1000, 4),
+        "relative_sentence_difference": round(relative_sentence_difference_correlation_without_1000, 4)
+    }
+}
+
+
+with open("length_correlation/json/length_correlation_statistics.json", "w", encoding="utf-8") as file:
+    json.dump(results, file, indent=4, ensure_ascii=False)
+
+
+with open("length_correlation/reports/length_correlation_report.txt", "w", encoding="utf-8") as file:
+    file.write("LENGTH CORRELATION REPORT\n")
+    file.write("=========================\n\n")
+
+    file.write("PAIR COUNTS\n")
+    file.write("-----------\n")
+    file.write("Total pairs: " + str(len(data)) + "\n")
+    file.write("Yes pairs: " + str(yes_total) + "\n")
+    file.write("No pairs: " + str(no_total) + "\n\n")
+
+    file.write("AVERAGE ARTICLE LENGTH\n")
+    file.write("----------------------\n")
+    file.write("Yes mean: " + str(yes_average_length_statistics["mean"]) + "\n")
+    file.write("Yes median: " + str(yes_average_length_statistics["50%"]) + "\n")
+    file.write("No mean: " + str(no_average_length_statistics["mean"]) + "\n")
+    file.write("No median: " + str(no_average_length_statistics["50%"]) + "\n\n")
+
+    file.write("ABSOLUTE LENGTH DIFFERENCE\n")
+    file.write("--------------------------\n")
+    file.write("Yes mean: " + str(yes_length_difference_statistics["mean"]) + "\n")
+    file.write("Yes median: " + str(yes_length_difference_statistics["50%"]) + "\n")
+    file.write("No mean: " + str(no_length_difference_statistics["mean"]) + "\n")
+    file.write("No median: " + str(no_length_difference_statistics["50%"]) + "\n\n")
+
+    file.write("RELATIVE LENGTH DIFFERENCE\n")
+    file.write("--------------------------\n")
+    file.write("Yes mean: " + str(yes_relative_length_difference_statistics["mean"]) + "\n")
+    file.write("Yes median: " + str(yes_relative_length_difference_statistics["50%"]) + "\n")
+    file.write("No mean: " + str(no_relative_length_difference_statistics["mean"]) + "\n")
+    file.write("No median: " + str(no_relative_length_difference_statistics["50%"]) + "\n\n")
+
+    file.write("SAME LENGTH\n")
+    file.write("-----------\n")
+    file.write("Yes: " + str(same_length_yes) + " (" + str(same_length_yes_percentage) + "%)\n")
+    file.write("No: " + str(same_length_no) + " (" + str(same_length_no_percentage) + "%)\n\n")
+
+    file.write("SIMILAR LENGTH - MAXIMUM 5% DIFFERENCE\n")
+    file.write("--------------------------------------\n")
+    file.write("Yes: " + str(similar_length_5_yes) + " (" + str(similar_length_5_yes_percentage) + "%)\n")
+    file.write("No: " + str(similar_length_5_no) + " (" + str(similar_length_5_no_percentage) + "%)\n\n")
+
+    file.write("SIMILAR LENGTH - MAXIMUM 10% DIFFERENCE\n")
+    file.write("---------------------------------------\n")
+    file.write("Yes: " + str(similar_length_10_yes) + " (" + str(similar_length_10_yes_percentage) + "%)\n")
+    file.write("No: " + str(similar_length_10_no) + " (" + str(similar_length_10_no_percentage) + "%)\n\n")
+
+    file.write("SIMILAR LENGTH - MAXIMUM 20% DIFFERENCE\n")
+    file.write("---------------------------------------\n")
+    file.write("Yes: " + str(similar_length_20_yes) + " (" + str(similar_length_20_yes_percentage) + "%)\n")
+    file.write("No: " + str(similar_length_20_no) + " (" + str(similar_length_20_no_percentage) + "%)\n\n")
+
+    file.write("BOTH TEXTS HAVE LENGTH 1000\n")
+    file.write("---------------------------\n")
+    file.write("Yes: " + str(both_lengths_1000_yes) + " (" + str(both_lengths_1000_yes_percentage) + "%)\n")
+    file.write("No: " + str(both_lengths_1000_no) + " (" + str(both_lengths_1000_no_percentage) + "%)\n\n")
+
+    file.write("AT LEAST ONE TEXT HAS LENGTH 1000\n")
+    file.write("---------------------------------\n")
+    file.write("Yes: " + str(at_least_one_length_1000_yes) + " (" + str(at_least_one_length_1000_yes_percentage) + "%)\n")
+    file.write("No: " + str(at_least_one_length_1000_no) + " (" + str(at_least_one_length_1000_no_percentage) + "%)\n\n")
+
+    file.write("SAME LENGTH WITHOUT 1000-1000 PAIRS\n")
+    file.write("-----------------------------------\n")
+    file.write("Yes: " + str(same_length_without_1000_yes) + " (" + str(same_length_without_1000_yes_percentage) + "% of remaining Yes pairs)\n")
+    file.write("No: " + str(same_length_without_1000_no) + " (" + str(same_length_without_1000_no_percentage) + "% of remaining No pairs)\n\n")
+
+    file.write("SENTENCE COUNTS\n")
+    file.write("---------------\n")
+    file.write("Yes average sentence count mean: " + str(yes_sentence_count_statistics["mean"]) + "\n")
+    file.write("No average sentence count mean: " + str(no_sentence_count_statistics["mean"]) + "\n")
+    file.write("Yes relative sentence difference mean: " + str(yes_relative_sentence_difference_statistics["mean"]) + "\n")
+    file.write("No relative sentence difference mean: " + str(no_relative_sentence_difference_statistics["mean"]) + "\n\n")
+
+    file.write("SAME SENTENCE COUNT\n")
+    file.write("-------------------\n")
+    file.write("Yes: " + str(same_sentence_count_yes) + " (" + str(same_sentence_count_yes_percentage) + "%)\n")
+    file.write("No: " + str(same_sentence_count_no) + " (" + str(same_sentence_count_no_percentage) + "%)\n\n")
+
+    file.write("CORRELATIONS WITH YES LABEL\n")
+    file.write("---------------------------\n")
+    file.write("Yes = 1 and No = 0\n")
+    file.write("Average length: " + str(round(average_length_correlation, 4)) + "\n")
+    file.write("Length difference: " + str(round(length_difference_correlation, 4)) + "\n")
+    file.write("Relative length difference: " + str(round(relative_length_difference_correlation, 4)) + "\n")
+    file.write("Average sentence count: " + str(round(average_sentence_count_correlation, 4)) + "\n")
+    file.write("Sentence count difference: " + str(round(sentence_count_difference_correlation, 4)) + "\n")
+    file.write("Relative sentence difference: " + str(round(relative_sentence_difference_correlation, 4)) + "\n\n")
+
+    file.write("CORRELATIONS WITHOUT 1000-1000 PAIRS\n")
+    file.write("------------------------------------\n")
+    file.write("Average length: " + str(round(average_length_correlation_without_1000, 4)) + "\n")
+    file.write("Length difference: " + str(round(length_difference_correlation_without_1000, 4)) + "\n")
+    file.write("Relative length difference: " + str(round(relative_length_difference_correlation_without_1000, 4)) + "\n")
+    file.write("Average sentence count: " + str(round(average_sentence_count_correlation_without_1000, 4)) + "\n")
+    file.write("Sentence count difference: " + str(round(sentence_count_difference_correlation_without_1000, 4)) + "\n")
+    file.write("Relative sentence difference: " + str(round(relative_sentence_difference_correlation_without_1000, 4)) + "\n")
+
+yes_relative_length_weights = []
+no_relative_length_weights = []
+
+for value in yes_relative_length_differences:
+    yes_relative_length_weights.append(100 / len(yes_relative_length_differences))
+
+for value in no_relative_length_differences:
+    no_relative_length_weights.append(100 / len(no_relative_length_differences))
+
+plt.figure(figsize=(10, 6))
+plt.hist(yes_relative_length_differences, bins=30, weights=yes_relative_length_weights, alpha=0.7, label="Yes", edgecolor="black")
+plt.hist(no_relative_length_differences, bins=30, weights=no_relative_length_weights, alpha=0.5, label="No", edgecolor="black")
+plt.title("Percentage distribution of relative length differences")
+plt.xlabel("Relative length difference")
+plt.ylabel("Percentage of pairs")
+plt.legend()
+plt.tight_layout()
+plt.savefig("length_correlation/graphical_representation/relative_length_difference_distribution.png")
+plt.close()
+
+
+plt.figure(figsize=(8, 6))
+plt.boxplot([yes_relative_length_differences, no_relative_length_differences], tick_labels=["Yes", "No"], orientation="vertical")
+yes_median = yes_relative_length_difference_statistics["50%"]
+no_median = no_relative_length_difference_statistics["50%"]
+
+plt.text(1, yes_median + 0.04, "Median: " + str(round(yes_median * 100, 2)) + "%", ha="center")
+plt.text(2, no_median + 0.04, "Median: " + str(round(no_median * 100, 2)) + "%", ha="center")
+plt.title("Relative length difference by classification")
+plt.xlabel("Classification")
+plt.ylabel("Relative length difference")
+plt.tight_layout()
+plt.savefig("length_correlation/graphical_representation/relative_length_difference_boxplot.png")
+plt.close()
+
+
+categories = ["Same length", "<= 5%", "<= 10%", "<= 20%"]
+yes_percentages = [same_length_yes_percentage, similar_length_5_yes_percentage, similar_length_10_yes_percentage, similar_length_20_yes_percentage]
+no_percentages = [same_length_no_percentage, similar_length_5_no_percentage, similar_length_10_no_percentage, similar_length_20_no_percentage]
+
+positions = list(range(len(categories)))
+bar_width = 0.35
+
+yes_positions = []
+no_positions = []
+
+for position in positions:
+    yes_positions.append(position - bar_width / 2)
+    no_positions.append(position + bar_width / 2)
+
+plt.figure(figsize=(10, 6))
+# plt.bar(yes_positions, yes_percentages, width=bar_width, label="Yes", edgecolor="black", alpha=0.7)
+# plt.bar(no_positions, no_percentages, width=bar_width, label="No", edgecolor="black", alpha=0.7)
+yes_bars = plt.bar(yes_positions, yes_percentages, width=bar_width, label="Yes", edgecolor="black", alpha=0.7)
+no_bars = plt.bar(no_positions, no_percentages, width=bar_width, label="No", edgecolor="black", alpha=0.7)
+
+add_bar_percentages(yes_bars)
+add_bar_percentages(no_bars)
+
+plt.xticks(positions, categories)
+plt.title("Percentage of pairs with similar lengths")
+plt.xlabel("Length similarity criterion")
+plt.ylabel("Percentage")
+plt.ylim(0, max(yes_percentages + no_percentages) + 10)
+plt.legend()
+plt.tight_layout()
+plt.savefig("length_correlation/graphical_representation/similar_length_percentages.png")
+plt.close()
+
+
+categories_1000 = ["Both are 1000", "At least one is 1000"]
+yes_percentages_1000 = [both_lengths_1000_yes_percentage, at_least_one_length_1000_yes_percentage]
+no_percentages_1000 = [both_lengths_1000_no_percentage, at_least_one_length_1000_no_percentage]
+
+positions = list(range(len(categories_1000)))
+
+yes_positions = []
+no_positions = []
+
+for position in positions:
+    yes_positions.append(position - bar_width / 2)
+    no_positions.append(position + bar_width / 2)
+
+plt.figure(figsize=(9, 6))
+yes_bars = plt.bar(yes_positions, yes_percentages_1000, width=bar_width, label="Yes", edgecolor="black", alpha=0.7)
+no_bars = plt.bar(no_positions, no_percentages_1000, width=bar_width, label="No", edgecolor="black", alpha=0.7)
+
+add_bar_percentages(yes_bars)
+add_bar_percentages(no_bars)
+
+plt.xticks(positions, categories_1000)
+plt.title("Texts with a length of 1000 characters")
+plt.xlabel("Criterion")
+plt.ylabel("Percentage")
+plt.ylim(0, max(yes_percentages_1000 + no_percentages_1000) + 10)
+plt.legend()
+plt.tight_layout()
+plt.savefig("length_correlation/graphical_representation/length_1000_percentages.png")
+plt.close()
+
+plt.figure(figsize=(8, 6))
+plt.boxplot([yes_relative_sentence_differences, no_relative_sentence_differences], tick_labels=["Yes", "No"], orientation="vertical")
+yes_sentence_median = yes_relative_sentence_difference_statistics["50%"]
+no_sentence_median = no_relative_sentence_difference_statistics["50%"]
+
+plt.text(1, yes_sentence_median + 0.04, "Median: " + str(round(yes_sentence_median * 100, 2)) + "%", ha="center")
+plt.text(2, no_sentence_median + 0.04, "Median: " + str(round(no_sentence_median * 100, 2)) + "%", ha="center")
+
+plt.title("Relative sentence count difference by classification")
+plt.xlabel("Classification")
+plt.ylabel("Relative sentence count difference")
+plt.tight_layout()
+plt.savefig("length_correlation/graphical_representation/relative_sentence_difference_boxplot.png")
+plt.close()
+
+yes_sentence_weights = []
+no_sentence_weights = []
+
+for value in yes_relative_sentence_differences:
+    yes_sentence_weights.append(100 / len(yes_relative_sentence_differences))
+
+for value in no_relative_sentence_differences:
+    no_sentence_weights.append(100 / len(no_relative_sentence_differences))
+
+plt.figure(figsize=(10, 6))
+plt.hist(yes_relative_sentence_differences, bins=30, weights=yes_sentence_weights, alpha=0.7, label="Yes", edgecolor="black")
+plt.hist(no_relative_sentence_differences, bins=30, weights=no_sentence_weights, alpha=0.5, label="No", edgecolor="black")
+plt.title("Percentage distribution of relative sentence count differences")
+plt.xlabel("Relative sentence count difference")
+plt.ylabel("Percentage of pairs")
+plt.legend()
+plt.tight_layout()
+plt.savefig("length_correlation/graphical_representation/relative_sentence_difference_distribution.png")
+plt.close()
+
+
+maximum_average_length = pd.Series(yes_average_lengths + no_average_lengths).quantile(0.95)
+
+yes_average_lengths_for_graph = []
+no_average_lengths_for_graph = []
+
+for value in yes_average_lengths:
+    if value <= maximum_average_length:
+        yes_average_lengths_for_graph.append(value)
+
+for value in no_average_lengths:
+    if value <= maximum_average_length:
+        no_average_lengths_for_graph.append(value)
+
+yes_average_weights = []
+no_average_weights = []
+
+for value in yes_average_lengths_for_graph:
+    yes_average_weights.append(100 / len(yes_average_lengths_for_graph))
+
+for value in no_average_lengths_for_graph:
+    no_average_weights.append(100 / len(no_average_lengths_for_graph))
+
+plt.figure(figsize=(10, 6))
+plt.hist(yes_average_lengths_for_graph, bins=30, weights=yes_average_weights, alpha=0.7, label="Yes", edgecolor="black")
+plt.hist(no_average_lengths_for_graph, bins=30, weights=no_average_weights, alpha=0.5, label="No", edgecolor="black")
+plt.title("Percentage distribution of average article lengths")
+plt.xlabel("Average length in characters")
+plt.ylabel("Percentage of pairs")
+plt.legend()
+plt.tight_layout()
+plt.savefig("length_correlation/graphical_representation/average_length_distribution.png")
+plt.close()

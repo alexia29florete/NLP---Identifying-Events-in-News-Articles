@@ -221,8 +221,87 @@ Evaluating extreme similarity instances exposes critical edge cases and systemic
 *   **Linguistic Mapping:** French (`fr`) vs. Romanian (`ro`).
 *   **Diagnostic Inspection:** While both documents share a baseline semantic entity (e.g., "Donald Trump/Harvard University"), severe format discrepancies led to an artificial drop in vector alignment. Document $d_1$ was an compressed, abstract summary, while document $d_2$ suffered from uncleaned HTML boilerplate, styling elements, and WordPress metadata injections. This demonstrates that document-level pooling remains highly sensitive to uncleaned structural noise.
 
----
+# Length correlation analysis
 
-detectăm limba articolului cu langdetect, folosim tokenizerul NLTK corespunzător atunci când limba este suportată, iar pentru celelalte limbi folosim fallback cu regex.
+To determine whether article length is associated with the similarity label, the analysis compared pairs classified as `Yes` and `No` using:
 
-Asta este mai corect metodologic decât să aplicăm tokenizerul implicit de engleză tuturor limbilor.
+- average article length;
+- absolute and relative length differences;
+- the proportion of pairs with exactly or approximately equal lengths;
+- the frequency of texts truncated at `1000` characters;
+- differences between the numbers of detected sentences.
+
+The article language is detected using `langdetect`. When the detected language is supported by NLTK, the corresponding language-specific sentence tokenizer is used. For unsupported languages, sentence boundaries are estimated using a regular-expression fallback.
+
+This approach is methodologically more appropriate than applying the default English tokenizer to every language.
+
+For each pair, the relative length difference was calculated as:
+
+```python
+relative_length_difference = abs(length1 - length2) / max(length1, length2)
+```
+
+## Average Article Length Distribution
+
+![Percentage distribution of average article lengths](length_correlation/graphical_representation/average_length_distribution.png)
+
+The distribution is strongly concentrated near `1000` characters for both classes. The concentration is higher for `Yes` pairs, indicating that similar pairs more frequently contain two long texts.
+
+However, this result must be interpreted carefully because `1000` characters appears to be a technical truncation limit rather than a natural article-length boundary. Consequently, the peak close to `1000` partly reflects dataset construction rather than an intrinsic characteristic of similar news articles.
+
+A value close to `0` indicates that the two texts have similar lengths, while a value close to `1` indicates a substantial imbalance.
+
+## Relative Length Difference
+
+![Relative length difference by classification](length_correlation/graphical_representation/relative_length_difference_boxplot.png)
+
+The median relative length differences are:
+
+- `Yes`: `1.44%`;
+- `No`: `6.00%`.
+
+This shows that pairs classified as similar generally contain texts with more closely matched lengths. The wider box and higher median for the `No` class indicate greater structural variation among dissimilar pairs.
+
+Nevertheless, both classes contain extreme cases with relative differences close to `1`. Therefore, article length alone cannot reliably determine whether two articles describe the same event.
+
+## Similar-Length Thresholds
+
+![Percentage of pairs with similar lengths](length_correlation/graphical_representation/similar_length_percentages.png)
+
+The percentage of pairs satisfying increasingly permissive length-similarity criteria is:
+
+| Length criterion | `Yes` | `No` | Difference |
+|---|---:|---:|---:|
+| Exactly equal length | `43.54%` | `35.20%` | `8.34` percentage points |
+| Relative difference `<= 5%` | `56.75%` | `48.28%` | `8.47` percentage points |
+| Relative difference `<= 10%` | `63.34%` | `55.73%` | `7.61` percentage points |
+| Relative difference `<= 20%` | `71.96%` | `65.11%` | `6.85` percentage points |
+
+Across all thresholds, `Yes` pairs are more likely to have similar lengths. The difference between the classes is consistent but moderate.
+
+The high percentages observed for the `No` class are also important: almost half of the dissimilar pairs differ in length by no more than `5%`. Thus, similar length is neither a sufficient nor a decisive indicator of semantic similarity.
+
+## Relative Sentence-Count Difference
+
+![Relative sentence count difference by classification](length_correlation/graphical_representation/relative_sentence_difference_boxplot.png)
+
+The median relative sentence-count difference is `33.33%` for both `Yes` and `No` pairs. The two distributions overlap strongly, although the `No` class shows slightly greater variability.
+
+This suggests that sentence count is a weaker structural indicator than character length. Articles about the same event may use different journalistic styles, including:
+
+- many short sentences;
+- fewer long sentences;
+- different quotation and paragraph structures;
+- different levels of contextual detail.
+
+Sentence segmentation also introduces additional noise because supported languages use language-specific NLTK tokenizers, while unsupported languages use a regular-expression fallback.
+
+## Length Analysis Conclusions
+
+The length analysis supports the following conclusions:
+
+1. **Similar pairs tend to have more closely matched lengths.** The `Yes` class has a lower median relative length difference and consistently higher percentages across the `5%`, `10%`, and `20%` similarity thresholds.
+2. **The association is informative but weak.** Large portions of the `Yes` and `No` distributions overlap, so length features cannot independently classify article similarity.
+3. **The `1000`-character truncation limit strongly influences the results.** A substantial proportion of exact-length matches is caused by both texts reaching the same technical limit.
+4. **Sentence count provides less separation than character length.** Its median relative difference is identical across the two classes, and the distributions overlap substantially.
+5. **Length should be treated as an auxiliary feature.** It may support semantic or lexical similarity measures, but it should not replace them.

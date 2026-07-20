@@ -1,0 +1,203 @@
+{
+    "pair_counts": {
+        "total": 99567,
+        "yes": 35119,
+        "no": 64448
+    },
+    "average_length": {
+        "yes": {
+            "count": 35119,
+            "mean": 931.3739,
+            "std": 411.9102,
+            "min": 19.0,
+            "25%": 836.0,
+            "50%": 992.0,
+            "75%": 1000.0,
+            "max": 31225.0
+        },
+        "no": {
+            "count": 64448,
+            "mean": 905.1376,
+            "std": 485.1972,
+            "min": 17.0,
+            "25%": 769.0,
+            "50%": 961.0,
+            "75%": 1000.0,
+            "max": 27602.5
+        }
+    },
+    "length_difference": {
+        "yes": {
+            "count": 35119,
+            "mean": 215.9181,
+            "std": 719.0183,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 12.0,
+            "75%": 227.0,
+            "max": 60450.0
+        },
+        "no": {
+            "count": 64448,
+            "mean": 261.2026,
+            "std": 809.3318,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 49.0,
+            "75%": 294.0,
+            "max": 53205.0
+        }
+    },
+    "relative_length_difference": {
+        "yes": {
+            "count": 35119,
+            "mean": 0.1605,
+            "std": 0.2435,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0144,
+            "75%": 0.2471,
+            "max": 0.9891
+        },
+        "no": {
+            "count": 64448,
+            "mean": 0.1956,
+            "std": 0.2577,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.06,
+            "75%": 0.3302,
+            "max": 0.9957
+        }
+    },
+    "average_sentence_count": {
+        "yes": {
+            "count": 35119,
+            "mean": 5.8103,
+            "std": 3.0537,
+            "min": 1.0,
+            "25%": 4.0,
+            "50%": 5.5,
+            "75%": 7.0,
+            "max": 209.5
+        },
+        "no": {
+            "count": 64448,
+            "mean": 5.8607,
+            "std": 3.5103,
+            "min": 1.0,
+            "25%": 4.0,
+            "50%": 5.5,
+            "75%": 7.0,
+            "max": 199.5
+        }
+    },
+    "sentence_count_difference": {
+        "yes": {
+            "count": 35119,
+            "mean": 2.6693,
+            "std": 4.2488,
+            "min": 0.0,
+            "25%": 1.0,
+            "50%": 2.0,
+            "75%": 4.0,
+            "max": 409.0
+        },
+        "no": {
+            "count": 64448,
+            "mean": 3.0264,
+            "std": 4.7582,
+            "min": 0.0,
+            "25%": 1.0,
+            "50%": 2.0,
+            "75%": 4.0,
+            "max": 288.0
+        }
+    },
+    "relative_sentence_difference": {
+        "yes": {
+            "count": 35119,
+            "mean": 0.3373,
+            "std": 0.2609,
+            "min": 0.0,
+            "25%": 0.125,
+            "50%": 0.3333,
+            "75%": 0.5,
+            "max": 0.9879
+        },
+        "no": {
+            "count": 64448,
+            "mean": 0.3541,
+            "std": 0.2576,
+            "min": 0.0,
+            "25%": 0.1429,
+            "50%": 0.3333,
+            "75%": 0.5556,
+            "max": 0.99
+        }
+    },
+    "same_length": {
+        "yes_count": 15292,
+        "yes_percentage": 43.54,
+        "no_count": 22684,
+        "no_percentage": 35.2
+    },
+    "similar_length_5_percent": {
+        "yes_count": 19929,
+        "yes_percentage": 56.75,
+        "no_count": 31118,
+        "no_percentage": 48.28
+    },
+    "similar_length_10_percent": {
+        "yes_count": 22243,
+        "yes_percentage": 63.34,
+        "no_count": 35919,
+        "no_percentage": 55.73
+    },
+    "similar_length_20_percent": {
+        "yes_count": 25271,
+        "yes_percentage": 71.96,
+        "no_count": 41959,
+        "no_percentage": 65.11
+    },
+    "both_lengths_1000": {
+        "yes_count": 14292,
+        "yes_percentage": 40.7,
+        "no_count": 20652,
+        "no_percentage": 32.04
+    },
+    "at_least_one_length_1000": {
+        "yes_count": 28099,
+        "yes_percentage": 80.01,
+        "no_count": 46940,
+        "no_percentage": 72.83
+    },
+    "same_length_without_1000_1000": {
+        "yes_count": 1000,
+        "yes_percentage": 4.8,
+        "no_count": 2032,
+        "no_percentage": 4.64
+    },
+    "same_sentence_count": {
+        "yes_count": 7312,
+        "yes_percentage": 20.82,
+        "no_count": 11358,
+        "no_percentage": 17.62
+    },
+    "correlations_with_yes_label": {
+        "average_length": 0.0272,
+        "length_difference": -0.0278,
+        "relative_length_difference": -0.0663,
+        "average_sentence_count": -0.0072,
+        "sentence_count_difference": -0.0372,
+        "relative_sentence_difference": -0.0309
+    },
+    "correlations_without_1000_1000_pairs": {
+        "average_length": 0.0197,
+        "length_difference": -0.0101,
+        "relative_length_difference": -0.0303,
+        "average_sentence_count": -0.0025,
+        "sentence_count_difference": -0.0195,
+        "relative_sentence_difference": -0.0022
+    }
+}

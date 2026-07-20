@@ -1,0 +1,95 @@
+LENGTH CORRELATION REPORT
+=========================
+
+PAIR COUNTS
+-----------
+Total pairs: 99567
+Yes pairs: 35119
+No pairs: 64448
+
+AVERAGE ARTICLE LENGTH
+----------------------
+Yes mean: 931.3739
+Yes median: 992.0
+No mean: 905.1376
+No median: 961.0
+
+ABSOLUTE LENGTH DIFFERENCE
+--------------------------
+Yes mean: 215.9181
+Yes median: 12.0
+No mean: 261.2026
+No median: 49.0
+
+RELATIVE LENGTH DIFFERENCE
+--------------------------
+Yes mean: 0.1605
+Yes median: 0.0144
+No mean: 0.1956
+No median: 0.06
+
+SAME LENGTH
+-----------
+Yes: 15292 (43.54%)
+No: 22684 (35.2%)
+
+SIMILAR LENGTH - MAXIMUM 5% DIFFERENCE
+--------------------------------------
+Yes: 19929 (56.75%)
+No: 31118 (48.28%)
+
+SIMILAR LENGTH - MAXIMUM 10% DIFFERENCE
+---------------------------------------
+Yes: 22243 (63.34%)
+No: 35919 (55.73%)
+
+SIMILAR LENGTH - MAXIMUM 20% DIFFERENCE
+---------------------------------------
+Yes: 25271 (71.96%)
+No: 41959 (65.11%)
+
+BOTH TEXTS HAVE LENGTH 1000
+---------------------------
+Yes: 14292 (40.7%)
+No: 20652 (32.04%)
+
+AT LEAST ONE TEXT HAS LENGTH 1000
+---------------------------------
+Yes: 28099 (80.01%)
+No: 46940 (72.83%)
+
+SAME LENGTH WITHOUT 1000-1000 PAIRS
+-----------------------------------
+Yes: 1000 (4.8% of remaining Yes pairs)
+No: 2032 (4.64% of remaining No pairs)
+
+SENTENCE COUNTS
+---------------
+Yes average sentence count mean: 5.8103
+No average sentence count mean: 5.8607
+Yes relative sentence difference mean: 0.3373
+No relative sentence difference mean: 0.3541
+
+SAME SENTENCE COUNT
+-------------------
+Yes: 7312 (20.82%)
+No: 11358 (17.62%)
+
+CORRELATIONS WITH YES LABEL
+---------------------------
+Yes = 1 and No = 0
+Average length: 0.0272
+Length difference: -0.0278
+Relative length difference: -0.0663
+Average sentence count: -0.0072
+Sentence count difference: -0.0372
+Relative sentence difference: -0.0309
+
+CORRELATIONS WITHOUT 1000-1000 PAIRS
+------------------------------------
+Average length: 0.0197
+Length difference: -0.0101
+Relative length difference: -0.0303
+Average sentence count: -0.0025
+Sentence count difference: -0.0195
+Relative sentence difference: -0.0022
