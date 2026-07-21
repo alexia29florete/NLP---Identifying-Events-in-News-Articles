@@ -870,6 +870,169 @@ write_sentence_report(
     no_max_sentence_article_id
 )
 
+# pie chart for sentence difference
+threshold_percentage = 1.0
+
+sentence_pie_labels = []
+sentence_pie_percentages = []
+
+other_pair_count = 0
+
+for difference in sorted(all_sentence_difference_counts.keys()):
+    pair_count = all_sentence_difference_counts[difference]
+    percentage = pair_count / len(data) * 100
+
+    if percentage >= threshold_percentage:
+        sentence_pie_labels.append(str(difference))
+        sentence_pie_percentages.append(percentage)
+    else:
+        other_pair_count = other_pair_count + pair_count
+
+other_percentage = other_pair_count / len(data) * 100
+
+if other_pair_count > 0:
+    sentence_pie_labels.append("Other")
+    sentence_pie_percentages.append(other_percentage)
+
+pastel_colors = [
+    "#A8DADC",
+    "#F6BD60",
+    "#E49BEB",
+    "#F7A8A8",
+    "#3D7A12",
+    "#F05E7D",
+    "#86DF18",
+    "#FFCAD4",
+    "#FFFB25",
+    "#48A9E1",
+    "#F8E78F",
+    "#EAC4D5"
+]
+
+plt.figure(figsize=(11, 8))
+
+wedges, texts, autotexts = plt.pie(
+    sentence_pie_percentages,
+    labels=None,
+    autopct=lambda percentage: str(round(percentage, 2)) + "%",
+    startangle=90,
+    pctdistance=0.7,
+    colors=pastel_colors[:len(sentence_pie_labels)],
+    textprops={
+        "fontsize": 8
+    },
+    wedgeprops={
+        "edgecolor": "white"
+    }
+)
+
+legend_labels = []
+
+for index in range(len(sentence_pie_labels)):
+    legend_labels.append(sentence_pie_labels[index] + " sentences: " + str(round(sentence_pie_percentages[index], 2)) + "%")
+
+plt.legend(legend_labels, title="Sentence-count difference", loc="center left", bbox_to_anchor=(1, 0.5))
+
+plt.title("Distribution of absolute sentence-count differences")
+plt.tight_layout()
+plt.savefig("length_correlation/graphical_representation/all_sentence_difference_piechart.png", dpi=300, bbox_inches="tight")
+plt.close()
+
+# word count diff grafic (total)
+word_difference_categories = [
+    "0",
+    "1-5",
+    "6-10",
+    "11-25",
+    "26-50",
+    "51-100",
+    "101-150",
+    "151-250",
+    "251-500",
+    ">500"
+]
+
+word_difference_category_counts = [0] * len(word_difference_categories)
+
+for difference in all_word_difference_counts:
+    pair_count = all_word_difference_counts[difference]
+
+    if difference == 0:
+        word_difference_category_counts[0] = word_difference_category_counts[0] + pair_count
+
+    elif difference <= 5:
+        word_difference_category_counts[1] = word_difference_category_counts[1] + pair_count
+
+    elif difference <= 10:
+        word_difference_category_counts[2] = word_difference_category_counts[2] + pair_count
+
+    elif difference <= 25:
+        word_difference_category_counts[3] = word_difference_category_counts[3] + pair_count
+
+    elif difference <= 50:
+        word_difference_category_counts[4] = word_difference_category_counts[4] + pair_count
+
+    elif difference <= 100:
+        word_difference_category_counts[5] = word_difference_category_counts[5] + pair_count
+
+    elif difference <= 150:
+        word_difference_category_counts[6] = word_difference_category_counts[6] + pair_count
+
+    elif difference <= 250:
+        word_difference_category_counts[7] = word_difference_category_counts[7] + pair_count
+
+    elif difference <= 500:
+        word_difference_category_counts[8] = word_difference_category_counts[8] + pair_count
+
+    else:
+        word_difference_category_counts[9] = word_difference_category_counts[9] + pair_count
+
+
+word_difference_category_percentages = []
+
+for count in word_difference_category_counts:
+    word_difference_category_percentages.append(
+        calculate_percentage(count, len(data))
+    )
+
+
+positions = list(range(len(word_difference_categories)))
+
+plt.figure(figsize=(13, 7))
+
+bars = plt.bar(
+    positions,
+    word_difference_category_percentages,
+    edgecolor="black",
+    alpha=0.75
+)
+
+for bar in bars:
+    height = bar.get_height()
+
+    plt.text(
+        bar.get_x() + bar.get_width() / 2,
+        height + 0.3,
+        str(round(height, 2)) + "%",
+        ha="center",
+        va="bottom",
+        fontsize=9
+    )
+
+plt.xticks(positions, word_difference_categories)
+plt.title("Distribution of absolute word-count differences")
+plt.xlabel("Difference in number of words")
+plt.ylabel("Percentage of pairs")
+plt.ylim(0, max(word_difference_category_percentages) + 4)
+plt.tight_layout()
+
+plt.savefig(
+    "length_correlation/graphical_representation/all_word_difference_categories.png",
+    dpi=300
+)
+
+plt.close()
+
 results = {
     "pair_counts": {
         "total": len(data),

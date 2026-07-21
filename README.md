@@ -410,6 +410,31 @@ Therefore, `No` pairs differ by approximately `7.6154` more words on average. Re
 
 This result is more informative than the individual article-size comparison. The two classes contain articles of broadly similar length, but the two articles within a `Yes` pair tend to have more closely matched word counts.
 
+## Detailed Difference Distributions
+
+Detailed word-count and sentence-count distributions were generated separately for `Yes`, `No`, and all pairs.
+
+For class-specific reports, percentages are calculated relative to the total number of pairs in that class. For the complete reports, percentages are calculated relative to the total number of valid pairs.
+
+Only difference values that actually occur in the dataset are included.
+
+The results show that small structural differences are the most frequent. Across the complete dataset:
+
+- `18.75%` of pairs have the same number of sentences;
+- `21.73%` differ by one sentence;
+- `17.37%` differ by two sentences;
+- `13.27%` differ by three sentences.
+
+Therefore, `71.12%` of all pairs differ by no more than three sentences.
+
+![Overall sentence-count difference distribution](length_correlation/graphical_representation/all_sentence_difference_piechart.png)
+
+For word counts, `6.83%` of all pairs have exactly the same number of words, and the frequency decreases gradually as the difference increases.
+
+![Overall word count difference distribution](length_correlation/graphical_representation/all_word_difference_categories.png)
+
+The detailed reports also revealed a small number of extreme outliers, so median values and percentile-based graphs should be considered alongside the mean.
+
 ## Length Analysis Conclusions
 
 The length analysis supports the following conclusions:
