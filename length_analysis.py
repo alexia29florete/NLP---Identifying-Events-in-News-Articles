@@ -553,6 +553,323 @@ sentence_count_difference_correlation_without_1000 = correlation_without_1000_da
 relative_sentence_difference_correlation_without_1000 = correlation_without_1000_dataframe["relative_sentence_difference"].corr(correlation_without_1000_dataframe["label_numeric"])
 
 
+yes_articles = {}
+no_articles = {}
+
+yes_sentence_difference_counts = {}
+no_sentence_difference_counts = {}
+
+yes_word_difference_counts = {}
+no_word_difference_counts = {}
+
+all_word_difference_counts = {}
+all_sentence_difference_counts = {}
+
+yes_min_word_pair = None
+yes_max_word_pair = None
+no_min_word_pair = None
+no_max_word_pair = None
+
+yes_min_sentence_pair = None
+yes_max_sentence_pair = None
+no_min_sentence_pair = None
+no_max_sentence_pair = None
+
+
+for elem in data:
+    label = elem["classification_openai/gpt-oss-120b_v1"]
+
+    id1 = elem["id1"]
+    id2 = elem["id2"]
+
+    word_count1 = elem["word_count1"]
+    word_count2 = elem["word_count2"]
+    word_difference = elem["word_count_difference"]
+
+    sentence_count1 = elem["sentence_count1"]
+    sentence_count2 = elem["sentence_count2"]
+    sentence_difference = elem["sentence_count_difference"]
+
+    if word_difference not in all_word_difference_counts:
+        all_word_difference_counts[word_difference] = 0
+
+    all_word_difference_counts[word_difference] = all_word_difference_counts[word_difference] + 1
+
+
+    if sentence_difference not in all_sentence_difference_counts:
+        all_sentence_difference_counts[sentence_difference] = 0
+
+    all_sentence_difference_counts[sentence_difference] = all_sentence_difference_counts[sentence_difference] + 1
+
+    article1 = {
+        "word_count": word_count1,
+        "sentence_count": sentence_count1
+    }
+
+    article2 = {
+        "word_count": word_count2,
+        "sentence_count": sentence_count2
+    }
+
+    word_pair = {
+        "id1": id1,
+        "id2": id2,
+        "word_count1": word_count1,
+        "word_count2": word_count2,
+        "difference": word_difference
+    }
+
+    sentence_pair = {
+        "id1": id1,
+        "id2": id2,
+        "sentence_count1": sentence_count1,
+        "sentence_count2": sentence_count2,
+        "difference": sentence_difference
+    }
+
+    if label == "Yes":
+        if id1 not in yes_articles:
+            yes_articles[id1] = article1
+
+        if id2 not in yes_articles:
+            yes_articles[id2] = article2
+
+        if yes_min_word_pair is None or word_difference < yes_min_word_pair["difference"]:
+            yes_min_word_pair = word_pair
+
+        if yes_max_word_pair is None or word_difference > yes_max_word_pair["difference"]:
+            yes_max_word_pair = word_pair
+
+        if yes_min_sentence_pair is None or sentence_difference < yes_min_sentence_pair["difference"]:
+            yes_min_sentence_pair = sentence_pair
+
+        if yes_max_sentence_pair is None or sentence_difference > yes_max_sentence_pair["difference"]:
+            yes_max_sentence_pair = sentence_pair
+
+        if sentence_difference not in yes_sentence_difference_counts:
+            yes_sentence_difference_counts[sentence_difference] = 0
+
+        yes_sentence_difference_counts[sentence_difference] = yes_sentence_difference_counts[sentence_difference] + 1
+
+        if word_difference not in yes_word_difference_counts:
+            yes_word_difference_counts[word_difference] = 0
+
+        yes_word_difference_counts[word_difference] = yes_word_difference_counts[word_difference] + 1
+
+    elif label == "No":
+        if id1 not in no_articles:
+            no_articles[id1] = article1
+
+        if id2 not in no_articles:
+            no_articles[id2] = article2
+
+        if no_min_word_pair is None or word_difference < no_min_word_pair["difference"]:
+            no_min_word_pair = word_pair
+
+        if no_max_word_pair is None or word_difference > no_max_word_pair["difference"]:
+            no_max_word_pair = word_pair
+
+        if no_min_sentence_pair is None or sentence_difference < no_min_sentence_pair["difference"]:
+            no_min_sentence_pair = sentence_pair
+
+        if no_max_sentence_pair is None or sentence_difference > no_max_sentence_pair["difference"]:
+            no_max_sentence_pair = sentence_pair
+
+        if sentence_difference not in no_sentence_difference_counts:
+            no_sentence_difference_counts[sentence_difference] = 0
+
+        no_sentence_difference_counts[sentence_difference] = no_sentence_difference_counts[sentence_difference] + 1
+
+        if word_difference not in no_word_difference_counts:
+            no_word_difference_counts[word_difference] = 0
+
+        no_word_difference_counts[word_difference] = no_word_difference_counts[word_difference] + 1
+
+
+yes_min_word_article_id = min(yes_articles, key=lambda article_id: yes_articles[article_id]["word_count"])
+yes_max_word_article_id = max(yes_articles, key=lambda article_id: yes_articles[article_id]["word_count"])
+
+no_min_word_article_id = min(no_articles, key=lambda article_id: no_articles[article_id]["word_count"])
+no_max_word_article_id = max(no_articles, key=lambda article_id: no_articles[article_id]["word_count"])
+
+yes_min_sentence_article_id = min(yes_articles, key=lambda article_id: yes_articles[article_id]["sentence_count"])
+yes_max_sentence_article_id = max(yes_articles, key=lambda article_id: yes_articles[article_id]["sentence_count"])
+
+no_min_sentence_article_id = min(no_articles, key=lambda article_id: no_articles[article_id]["sentence_count"])
+no_max_sentence_article_id = max(no_articles, key=lambda article_id: no_articles[article_id]["sentence_count"])
+
+
+def write_word_report(path, title, label, articles, difference_counts, total_pairs, min_pair, max_pair, min_article_id, max_article_id):
+    with open(path, "w", encoding="utf-8") as file:
+        file.write(title + "\n")
+        file.write("=" * len(title) + "\n\n")
+
+        file.write("PAIR WITH MINIMUM WORD-COUNT DIFFERENCE\n")
+        file.write("---------------------------------------\n")
+        file.write("id1: " + str(min_pair["id1"]) + " | id2: " + str(min_pair["id2"]) + " | word_count1: " + str(min_pair["word_count1"]) + " | word_count2: " + str(min_pair["word_count2"]) + " | word_count_difference: " + str(min_pair["difference"]) + "\n\n")
+
+        file.write("PAIR WITH MAXIMUM WORD-COUNT DIFFERENCE\n")
+        file.write("---------------------------------------\n")
+        file.write("id1: " + str(max_pair["id1"]) + " | id2: " + str(max_pair["id2"]) + " | word_count1: " + str(max_pair["word_count1"]) + " | word_count2: " + str(max_pair["word_count2"]) + " | word_count_difference: " + str(max_pair["difference"]) + "\n\n")
+
+        file.write("ARTICLE WITH THE FEWEST WORDS\n")
+        file.write("-----------------------------\n")
+        file.write("id: " + str(min_article_id) + " | word_count: " + str(articles[min_article_id]["word_count"]) + "\n\n")
+
+        file.write("ARTICLE WITH THE MOST WORDS\n")
+        file.write("---------------------------\n")
+        file.write("id: " + str(max_article_id) + " | word_count: " + str(articles[max_article_id]["word_count"]) + "\n\n")
+
+        file.write("WORD-DIFFERENCE DISTRIBUTION\n")
+        file.write("----------------------------\n")
+
+        for difference in sorted(difference_counts.keys()):
+            pair_count = difference_counts[difference]
+
+            if pair_count != 0:
+                percentage = calculate_percentage(pair_count, total_pairs)
+                file.write("word_difference: " + str(difference) + " | pair_count: " + str(pair_count) + " | percentage: " + str(percentage) + "%\n")
+
+        file.write("\n")
+
+        file.write("ALL PAIRS\n")
+        file.write("---------\n")
+
+        for elem in data:
+            if elem["classification_openai/gpt-oss-120b_v1"] == label:
+                file.write("id1: " + str(elem["id1"]) + " | id2: " + str(elem["id2"]) + " | word_count1: " + str(elem["word_count1"]) + " | word_count2: " + str(elem["word_count2"]) + " | word_count_difference: " + str(elem["word_count_difference"]) + "\n")
+
+
+def write_sentence_report(path, title, label, articles, difference_counts, total_pairs, min_pair, max_pair, min_article_id, max_article_id):
+    with open(path, "w", encoding="utf-8") as file:
+        file.write(title + "\n")
+        file.write("=" * len(title) + "\n\n")
+
+        file.write("PAIR WITH MINIMUM SENTENCE-COUNT DIFFERENCE\n")
+        file.write("-------------------------------------------\n")
+        file.write("id1: " + str(min_pair["id1"]) + " | id2: " + str(min_pair["id2"]) + " | sentence_count1: " + str(min_pair["sentence_count1"]) + " | sentence_count2: " + str(min_pair["sentence_count2"]) + " | sentence_count_difference: " + str(min_pair["difference"]) + "\n\n")
+
+        file.write("PAIR WITH MAXIMUM SENTENCE-COUNT DIFFERENCE\n")
+        file.write("-------------------------------------------\n")
+        file.write("id1: " + str(max_pair["id1"]) + " | id2: " + str(max_pair["id2"]) + " | sentence_count1: " + str(max_pair["sentence_count1"]) + " | sentence_count2: " + str(max_pair["sentence_count2"]) + " | sentence_count_difference: " + str(max_pair["difference"]) + "\n\n")
+
+        file.write("ARTICLE WITH THE FEWEST SENTENCES\n")
+        file.write("---------------------------------\n")
+        file.write("id: " + str(min_article_id) + " | sentence_count: " + str(articles[min_article_id]["sentence_count"]) + "\n\n")
+
+        file.write("ARTICLE WITH THE MOST SENTENCES\n")
+        file.write("-------------------------------\n")
+        file.write("id: " + str(max_article_id) + " | sentence_count: " + str(articles[max_article_id]["sentence_count"]) + "\n\n")
+
+        file.write("SENTENCE-DIFFERENCE DISTRIBUTION\n")
+        file.write("--------------------------------\n")
+
+        maximum_difference = max(difference_counts.keys())
+
+        for difference in range(maximum_difference + 1):
+            if difference in difference_counts:
+                pair_count = difference_counts[difference]
+            else:
+                pair_count = 0
+
+            if pair_count != 0:
+                percentage = calculate_percentage(pair_count, total_pairs)
+                file.write("sentence_difference: " + str(difference) + " | pair_count: " + str(pair_count) + " | percentage: " + str(percentage) + "%\n")
+
+        file.write("\nALL PAIRS\n")
+        file.write("---------\n")
+
+        for elem in data:
+            if elem["classification_openai/gpt-oss-120b_v1"] == label:
+                file.write("id1: " + str(elem["id1"]) + " | id2: " + str(elem["id2"]) + " | sentence_count1: " + str(elem["sentence_count1"]) + " | sentence_count2: " + str(elem["sentence_count2"]) + " | sentence_count_difference: " + str(elem["sentence_count_difference"]) + "\n")
+
+
+with open("length_correlation/reports/all_word_count_differences.txt", "w", encoding="utf-8") as file:
+    file.write("ALL WORD-DIFFERENCE DISTRIBUTION\n")
+    file.write("================================\n\n")
+
+    for difference in sorted(all_word_difference_counts.keys()):
+        pair_count = all_word_difference_counts[difference]
+
+        if pair_count != 0:
+            article_count = pair_count * 2
+            percentage = calculate_percentage(pair_count, len(data))
+
+            file.write(
+                "word_difference: " + str(difference)
+                + " | pair_count: " + str(pair_count)
+                + " | percentage: " + str(percentage) + "%\n"
+            )
+
+with open("length_correlation/reports/all_sentence_count_differences.txt", "w", encoding="utf-8") as file:
+    file.write("ALL SENTENCE-DIFFERENCE DISTRIBUTION\n")
+    file.write("====================================\n\n")
+
+    for difference in sorted(all_sentence_difference_counts.keys()):
+        pair_count = all_sentence_difference_counts[difference]
+
+        if pair_count != 0:
+            article_count = pair_count * 2
+            percentage = calculate_percentage(pair_count, len(data))
+
+            file.write(
+                "sentence_difference: " + str(difference)
+                + " | pair_count: " + str(pair_count)
+                + " | percentage: " + str(percentage) + "%\n"
+            )
+
+write_word_report(
+    "length_correlation/reports/yes_word_count_differences.txt",
+    "YES WORD COUNT DIFFERENCES",
+    "Yes",
+    yes_articles,
+    yes_word_difference_counts,
+    yes_total,
+    yes_min_word_pair,
+    yes_max_word_pair,
+    yes_min_word_article_id,
+    yes_max_word_article_id
+)
+
+write_word_report(
+    "length_correlation/reports/no_word_count_differences.txt",
+    "NO WORD COUNT DIFFERENCES",
+    "No",
+    no_articles,
+    no_word_difference_counts,
+    no_total,
+    no_min_word_pair,
+    no_max_word_pair,
+    no_min_word_article_id,
+    no_max_word_article_id
+)
+
+write_sentence_report(
+    "length_correlation/reports/yes_sentence_count_differences.txt",
+    "YES SENTENCE COUNT DIFFERENCES",
+    "Yes",
+    yes_articles,
+    yes_sentence_difference_counts,
+    yes_total,
+    yes_min_sentence_pair,
+    yes_max_sentence_pair,
+    yes_min_sentence_article_id,
+    yes_max_sentence_article_id
+)
+
+write_sentence_report(
+    "length_correlation/reports/no_sentence_count_differences.txt",
+    "NO SENTENCE COUNT DIFFERENCES",
+    "No",
+    no_articles,
+    no_sentence_difference_counts,
+    no_total,
+    no_min_sentence_pair,
+    no_max_sentence_pair,
+    no_min_sentence_article_id,
+    no_max_sentence_article_id
+)
+
 results = {
     "pair_counts": {
         "total": len(data),
