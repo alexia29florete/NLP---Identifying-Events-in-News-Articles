@@ -199,5 +199,125 @@
         "average_sentence_count": -0.0025,
         "sentence_count_difference": -0.0195,
         "relative_sentence_difference": -0.0022
+    },
+    "word_analysis": {
+        "yes": {
+            "article_occurrences": 70238,
+            "total_words": 10018594,
+            "word_count_per_article": {
+                "count": 70238,
+                "mean": 142.6378,
+                "std": 91.0671,
+                "min": 2.0,
+                "25%": 127.0,
+                "50%": 148.0,
+                "75%": 160.0,
+                "max": 11066.0
+            },
+            "average_word_count_per_pair": {
+                "count": 35119,
+                "mean": 142.6378,
+                "std": 67.7615,
+                "min": 2.5,
+                "25%": 123.0,
+                "50%": 144.5,
+                "75%": 158.0,
+                "max": 5611.0
+            },
+            "word_count_difference": {
+                "count": 35119,
+                "mean": 38.0306,
+                "std": 115.5876,
+                "min": 0.0,
+                "25%": 4.0,
+                "50%": 13.0,
+                "75%": 38.0,
+                "max": 10910.0
+            }
+        },
+        "no": {
+            "article_occurrences": 128896,
+            "total_words": 17941175,
+            "word_count_per_article": {
+                "count": 128896,
+                "mean": 139.1911,
+                "std": 102.5643,
+                "min": 1.0,
+                "25%": 115.0,
+                "50%": 146.0,
+                "75%": 161.0,
+                "max": 6956.0
+            },
+            "average_word_count_per_pair": {
+                "count": 64448,
+                "mean": 139.1911,
+                "std": 77.6806,
+                "min": 1.0,
+                "25%": 114.5,
+                "50%": 141.5,
+                "75%": 157.5,
+                "max": 3543.5
+            },
+            "word_count_difference": {
+                "count": 64448,
+                "mean": 45.646,
+                "std": 125.9259,
+                "min": 0.0,
+                "25%": 6.0,
+                "50%": 17.0,
+                "75%": 49.0,
+                "max": 6825.0
+            }
+        }
+    },
+    "sentence_analysis": {
+        "yes": {
+            "article_occurrences": 70238,
+            "total_sentences": 408102,
+            "sentence_count_per_article": {
+                "count": 70238,
+                "mean": 5.8103,
+                "std": 3.9521,
+                "min": 1.0,
+                "25%": 4.0,
+                "50%": 6.0,
+                "75%": 7.0,
+                "max": 414.0
+            },
+            "sentence_count_difference": {
+                "count": 35119,
+                "mean": 2.6693,
+                "std": 4.2488,
+                "min": 0.0,
+                "25%": 1.0,
+                "50%": 2.0,
+                "75%": 4.0,
+                "max": 409.0
+            }
+        },
+        "no": {
+            "article_occurrences": 128896,
+            "total_sentences": 755420,
+            "sentence_count_per_article": {
+                "count": 128896,
+                "mean": 5.8607,
+                "std": 4.5024,
+                "min": 1.0,
+                "25%": 3.0,
+                "50%": 5.0,
+                "75%": 7.0,
+                "max": 295.0
+            },
+            "sentence_count_difference": {
+                "count": 64448,
+                "mean": 3.0264,
+                "std": 4.7582,
+                "min": 0.0,
+                "25%": 1.0,
+                "50%": 2.0,
+                "75%": 4.0,
+                "max": 288.0
+            }
+        }
     }
 }

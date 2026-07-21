@@ -1,0 +1,23 @@
+Articles from Yes and No pairs have a similar individual structural size.
+Yes articles contain an average of 142.6378 words, while No articles contain an average of 139.1911 words.
+The difference between the two classes is 3.4467 words per article.
+
+The difference between the articles inside each pair is more informative than the individual article length.
+The average word-count difference is 38.0306 words for Yes pairs and 45.646 words for No pairs.
+Therefore, No pairs differ by approximately 7.6154 more words than Yes pairs.
+
+The average number of sentences per article is almost identical between the two classes.
+Yes articles contain an average of 5.8103 sentences, while No articles contain an average of 5.8607 sentences.
+
+Yes pairs have a slightly smaller sentence-count difference.
+The average sentence-count difference is 2.6693 for Yes pairs and 3.0264 for No pairs.
+No pairs differ by approximately 0.3571 more sentences than Yes pairs.
+
+Pairs with exactly the same number of sentences represent 20.82% of Yes pairs and 17.62% of No pairs.
+The percentage is 3.2 percentage points higher for Yes pairs.
+
+Most pairs differ by only a small number of sentences.
+The distributions of Yes and No pairs overlap considerably, which means that sentence count alone cannot reliably determine whether two articles describe the same event.
+
+Overall, Yes pairs tend to have more similar word counts and sentence counts than No pairs.
+However, these structural differences are moderate and should be used as auxiliary features together with lexical, semantic and temporal similarity.

@@ -14,10 +14,10 @@ An article was considered invalid when:
 ### Cleaning results
 
 ```text
-Invalid articles: 813
+Invalid articles: 786
 Initial pairs: 100000
-Removed pairs: 449
-Remaining pairs: 99551
+Removed pairs: 433
+Remaining pairs: 99567
 ```
 
 *Methodological Note:* A primary challenge identified during language classification via `langdetect` was the systematic misclassification of heavily corrupted text payloads (dominated by  characters) as Bengali (`bn`), rather than generating an `unknown` or low-confidence exception.
@@ -296,6 +296,120 @@ This suggests that sentence count is a weaker structural indicator than characte
 
 Sentence segmentation also introduces additional noise because supported languages use language-specific NLTK tokenizers, while unsupported languages use a regular-expression fallback.
 
+## Absolute Sentence Count Difference
+
+![Absolute sentence-count difference](length_correlation/graphical_representation/sentence_count_difference_categories.png)
+
+The absolute sentence-count difference measures the concrete difference between the two articles in each pair:
+
+```python
+sentence_count_difference = abs(sentence_count1 - sentence_count2)
+```
+
+Unlike the relative sentence-count difference, this measure is expressed directly in numbers of sentences and is therefore easier to interpret.
+
+The distribution shows that most article pairs differ by only a small number of sentences:
+
+| Sentence-count difference | `Yes` | `No` |
+|---:|---:|---:|
+| `0` | `20.82%` | `17.62%` |
+| `1` | `21.63%` | `21.79%` |
+| `2` | `17.29%` | `17.41%` |
+| `3` | `13.35%` | `13.23%` |
+| `4` | `9.83%` | `9.48%` |
+| `5` | `6.63%` | `6.71%` |
+| `6` | `3.82%` | `4.63%` |
+| `7` | `2.36%` | `2.94%` |
+| `8` | `1.36%` | `1.79%` |
+| `9` | `0.66%` | `1.04%` |
+| `10` | `0.47%` | `0.78%` |
+| `> 10` | `1.78%` | `2.58%` |
+
+Pairs with exactly the same number of sentences represent `20.82%` of `Yes` pairs and `17.62%` of `No` pairs. The proportion is therefore `3.20` percentage points higher for similar pairs.
+
+The analysis of values close to zero confirmed that the peak in the previous relative-difference histogram was caused almost entirely by exact equality:
+
+```text
+Exact zero Yes: 7312
+Near zero Yes: 0
+Exact zero No: 11358
+Near zero No: 1
+```
+
+Thus, the first interval did not contain a large hidden group of small positive differences. It primarily represented article pairs with exactly the same number of detected sentences.
+
+The cumulative results also show a small structural advantage for the `Yes` class:
+
+- `42.45%` of `Yes` pairs and `39.41%` of `No` pairs differ by at most one sentence;
+- `59.74%` of `Yes` pairs and `56.82%` of `No` pairs differ by at most two sentences;
+- `73.09%` of `Yes` pairs and `70.05%` of `No` pairs differ by at most three sentences.
+
+The average sentence-count difference is:
+
+- `Yes`: `2.6693` sentences;
+- `No`: `3.0264` sentences.
+
+Therefore, `No` pairs differ by approximately `0.3571` more sentences on average. This difference is observable but small, and the distributions still overlap considerably.
+
+## Word Count Analysis
+
+Word counts were computed for each article using a Unicode-aware regular expression. The analysis includes both individual article size and the difference between the two articles in each pair.
+
+### Word Counts per Article
+
+![Percentage distribution of word counts per article](length_correlation/graphical_representation/word_count_per_article_distribution.png)
+
+The individual article-size statistics are:
+
+| Statistic | `Yes` | `No` |
+|---|---:|---:|
+| Article occurrences | `70238` | `128896` |
+| Total words | `10018594` | `17941175` |
+| Mean words per article | `142.6378` | `139.1911` |
+| Median words per article | `148` | `146` |
+
+The total number of words is substantially higher for the `No` class because the dataset contains many more `No` pairs. Therefore, total counts should not be interpreted as evidence that `No` articles are naturally longer.
+
+The means and medians provide a fairer comparison. Articles from `Yes` pairs contain only `3.4467` more words on average than articles from `No` pairs. This corresponds to a difference of approximately `2.5%`.
+
+The two distributions are strongly overlapping and are both concentrated roughly between `130` and `180` words. Consequently, the individual number of words in an article provides little separation between the two classes.
+
+The concentration in this interval is also affected by the technical `1000`-character truncation limit. The observed word counts describe the available text fragments rather than necessarily the full original articles.
+
+## Absolute Word Count Difference
+
+![Absolute word-count difference](length_correlation/graphical_representation/word_count_difference_categories.png)
+
+The absolute word-count difference is defined as:
+
+```python
+word_count_difference = abs(word_count1 - word_count2)
+```
+
+The distribution was divided into concrete intervals:
+
+| Word-count difference | `Yes` | `No` |
+|---:|---:|---:|
+| `0–10` | `45.76%` | `37.19%` |
+| `11–25` | `21.21%` | `23.08%` |
+| `26–50` | `12.92%` | `15.50%` |
+| `51–75` | `7.40%` | `8.88%` |
+| `76–100` | `4.42%` | `5.63%` |
+| `> 100` | `8.29%` | `9.71%` |
+
+The most important difference appears in the `0–10` interval. Almost half of the `Yes` pairs have article lengths that differ by at most ten words, compared with `37.19%` of the `No` pairs.
+
+For every interval above ten words, the `No` percentage is higher. This indicates that dissimilar pairs are more frequently structurally imbalanced.
+
+The average word-count differences are:
+
+- `Yes`: `38.0306` words;
+- `No`: `45.6460` words.
+
+Therefore, `No` pairs differ by approximately `7.6154` more words on average. Relative to the `Yes` mean, the average difference is approximately `20%` larger for the `No` class.
+
+This result is more informative than the individual article-size comparison. The two classes contain articles of broadly similar length, but the two articles within a `Yes` pair tend to have more closely matched word counts.
+
 ## Length Analysis Conclusions
 
 The length analysis supports the following conclusions:
@@ -305,3 +419,8 @@ The length analysis supports the following conclusions:
 3. **The `1000`-character truncation limit strongly influences the results.** A substantial proportion of exact-length matches is caused by both texts reaching the same technical limit.
 4. **Sentence count provides less separation than character length.** Its median relative difference is identical across the two classes, and the distributions overlap substantially.
 5. **Length should be treated as an auxiliary feature.** It may support semantic or lexical similarity measures, but it should not replace them.
+6. **Articles from `Yes` and `No` pairs have similar individual sizes.** Their average word counts differ by only `3.4467` words per article, and their sentence-count means are almost identical.
+7. **Within-pair differences are more informative than individual article size.** `Yes` pairs have smaller average word-count and sentence-count differences.
+8. **Exact sentence-count equality is more frequent for similar pairs.** It occurs in `20.82%` of `Yes` pairs and `17.62%` of `No` pairs.
+9. **Small word-count differences are substantially more common for `Yes` pairs.** A difference of at most ten words occurs in `45.76%` of `Yes` pairs, compared with `37.19%` of `No` pairs.
+10. **Large structural differences are more frequent for `No` pairs.** The `No` class has higher percentages in every word-difference interval above ten words and in the larger sentence-difference categories.

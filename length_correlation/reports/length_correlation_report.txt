@@ -93,3 +93,27 @@ Relative length difference: -0.0303
 Average sentence count: -0.0025
 Sentence count difference: -0.0195
 Relative sentence difference: -0.0022
+WORD COUNTS
+-----------
+Yes article occurrences: 70238
+No article occurrences: 128896
+Total words in Yes pairs: 10018594
+Total words in No pairs: 17941175
+Yes words per article mean: 142.6378
+Yes words per article median: 148.0
+No words per article mean: 139.1911
+No words per article median: 146.0
+Yes word difference mean: 38.0306
+No word difference mean: 45.646
+
+SENTENCE COUNTS PER ARTICLE
+---------------------------
+Total sentences in Yes pairs: 408102
+Total sentences in No pairs: 755420
+Yes sentences per article mean: 5.8103
+Yes sentences per article median: 6.0
+No sentences per article mean: 5.8607
+No sentences per article median: 5.0
+Yes sentence difference mean: 2.6693
+No sentence difference mean: 3.0264
+
