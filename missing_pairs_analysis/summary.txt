@@ -1,0 +1,9 @@
+Missing Pairs Analysis
+-------------------------------
+
+Rows in dataset: 99567
+Unique articles: 179369
+Unique existing pairs: 99331
+Duplicate pair occurrences: 236
+Possible pairs: 16086529396
+Missing pairs: 16086430065

@@ -1,0 +1,9 @@
+Compare the following two news articles and decide if they describe the same specific subject, occurrence, or data.
+
+**Article 1 Title:** { title_1 }
+**Article 1 Content:** { content_1 }
+
+**Article 2 Title:** { title_2 }
+**Article 2 Content:** { content_2 }
+
+Do the two articles describe the same subject or occurrence? Answer only **Yes** or **No**.
