@@ -1,0 +1,14 @@
+Missing Pairs Benchmark
+-------------------------------
+
+Benchmark pairs: 1000000
+Total benchmark time: 3.6532132625579834 seconds
+Average time per pair: 3.6532132625579834e-06 seconds
+
+Estimated processing time for all missing pairs
+-------------------------------
+Seconds: 58767.15966066948
+Minutes: 979.452661011158
+Hours: 16.324211016852633
+Days: 0.6801754590355263
+Years: 0.0018634944083165104
