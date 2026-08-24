@@ -1,0 +1,16 @@
+Missing Pair Representation
+-------------------------------
+
+Rows in dataset: 99567
+Unique articles: 179369
+Duplicate pair occurrences: 236
+
+All possible unordered pairs: 16086529396
+Existing pairs excluded: 99331
+Missing pairs expected: 16086430065
+Missing pairs generated: 16086430065
+
+PKL size: 72653.97345352173 MB
+PKL size: 70.95114595070481 GB
+Generation time: 4542.776280641556 seconds
+Total time: 4546.743306159973 seconds

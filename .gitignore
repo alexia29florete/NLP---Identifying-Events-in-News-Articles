@@ -220,3 +220,4 @@ __marimo__/
 
 # *.jsonl
 invalid_classifications.jsonl
+missing_pairs_analysis/*.pkl

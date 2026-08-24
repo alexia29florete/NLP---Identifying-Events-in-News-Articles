@@ -1,0 +1,26 @@
+Compact Pair Structure Benchmark
+-------------------------------
+
+Benchmark pairs: 1000000
+Benchmark generation time: 0.39064455032348633 seconds
+Average generation time per pair: 3.9064455032348633e-07 seconds
+
+JSONL
+-------------------------------
+Write time: 0.03136253356933594 seconds
+Size: 6.675760269165039 MB
+Bytes per pair: 7.000042
+Estimated full size: 104.87286504938697 GB
+
+PKL
+-------------------------------
+Write time: 0.014821290969848633 seconds
+Size: 0.9557733535766602 MB
+Bytes per pair: 1.002201
+Estimated full size: 15.014722801000433 GB
+
+Estimated full generation time
+-------------------------------
+Seconds: 6284.115042165964
+Hours: 1.7455875117127677
+Days: 0.07273281298803198
